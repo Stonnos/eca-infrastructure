@@ -1,0 +1,27 @@
+version: '3.5'
+services:
+
+  eca-db:
+    volumes:
+      - eca-pgdata:/var/lib/postgresql/data
+
+  notification-db:
+    volumes:
+      - notification-pgdata:/var/lib/postgresql/data
+
+  ers-db:
+    volumes:
+      - ers-pgdata:/var/lib/postgresql/data
+
+  eca-server:
+    volumes:
+      - E:/experiment:/home/experiment
+      - E:/experiment/data:/home/experiment/data
+
+volumes:
+  eca-pgdata:
+    name: eca-pgdata
+  notification-pgdata:
+    name: notification-pgdata
+  ers-pgdata:
+    name: ers-pgdata

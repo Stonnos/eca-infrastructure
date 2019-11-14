@@ -1,0 +1,118 @@
+version: '3.5'
+services:
+
+  eca-db:
+    image: postgres:9.6.9
+    container_name: eca-db
+    volumes:
+      - ./scripts/postgresinit.sql:/docker-entrypoint-initdb.d/eca-db-postgresinit.sql
+      - /home/eca-pgdata:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      TZ: "Asia/Novosibirsk"
+      PGTZ: "Asia/Novosibirsk"
+
+  notification-db:
+    image: postgres:9.6.9
+    container_name: notification-db
+    volumes:
+      - ./scripts/postgresinit.sql:/docker-entrypoint-initdb.d/notification-db-postgresinit.sql
+      - /home/notification-pgdata:/var/lib/postgresql/data
+    ports:
+      - "5435:5432"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      TZ: "Asia/Novosibirsk"
+      PGTZ: "Asia/Novosibirsk"
+
+  ers-db:
+    image: postgres:9.6.9
+    container_name: ers-db
+    volumes:
+      - ./scripts/postgresinit.sql:/docker-entrypoint-initdb.d/ers-db-postgresinit.sql
+      - /home/ers-pgdata:/var/lib/postgresql/data
+    ports:
+      - "5434:5432"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      TZ: "Asia/Novosibirsk"
+      PGTZ: "Asia/Novosibirsk"
+
+  eca-server:
+    image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:eca-server
+    container_name: eca-server
+    command: ["/wait-for-it.sh", "eca-db:5432", "--timeout=${DB_CONTAINER_WAIT_TIMEOUT}", "--", "catalina.sh", "run"]
+    volumes:
+      - /home/experiment:/home/experiment
+      - /home/experiment/data:/home/experiment/data
+    environment:
+      TZ: "Asia/Novosibirsk"
+      SPRING_PROFILES_ACTIVE: "docker"
+    depends_on:
+      - eca-db
+      - monitoring
+
+  eca-oauth:
+    image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:eca-oauth
+    container_name: eca-oauth
+    command: ["/wait-for-it.sh", "eca-db:5432", "--timeout=${DB_CONTAINER_WAIT_TIMEOUT}", "--", "catalina.sh", "run"]
+    environment:
+      TZ: "Asia/Novosibirsk"
+      SPRING_PROFILES_ACTIVE: "docker"
+    depends_on:
+      - eca-db
+      - monitoring
+
+  eca-web:
+    image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:eca-web
+    container_name: eca-web
+    environment:
+      TZ: "Asia/Novosibirsk"
+      SPRING_PROFILES_ACTIVE: "docker"
+    depends_on:
+      - eca-server
+
+  zuul-gate:
+    image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:zuul-gate
+    container_name: zuul-gate
+    environment:
+      TZ: "Asia/Novosibirsk"
+    ports:
+      - "8080:8080"
+
+  monitoring:
+    image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:monitoring
+    container_name: monitoring
+    environment:
+      TZ: "Asia/Novosibirsk"
+    ports:
+      - "8085:8080"
+
+  notification-service:
+    image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:notification-service
+    container_name: notification-service
+    command: ["/wait-for-it.sh", "notification-db:5432", "--timeout=${DB_CONTAINER_WAIT_TIMEOUT}", "--", "catalina.sh", "run"]
+    environment:
+      TZ: "Asia/Novosibirsk"
+      SPRING_PROFILES_ACTIVE: "docker"
+    ports:
+      - "8082:8080"
+    depends_on:
+      - notification-db
+
+  evaluation-results-service:
+    image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:evaluation-results-service
+    container_name: evaluation-results-service
+    command: ["/wait-for-it.sh", "ers-db:5432", "--timeout=${DB_CONTAINER_WAIT_TIMEOUT}", "--", "catalina.sh", "run"]
+    environment:
+      TZ: "Asia/Novosibirsk"
+      SPRING_PROFILES_ACTIVE: "docker"
+    ports:
+      - "8081:8080"
+    depends_on:
+      - ers-db
