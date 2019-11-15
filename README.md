@@ -50,3 +50,9 @@
 docker-compose down (для ОС семейства Linux)
 
 docker-compose -f docker-compose.yaml -f docker-compose.win10.yaml down (для Windows 10)
+
+5. Для развертывания вместе с SonarQube необходимо использовать команду:
+
+    docker-compose -f docker-compose.yaml -f docker-compose.sonar.yaml up -d (для ОС семейства Linux)
+
+    docker-compose -f docker-compose.yaml -f docker-compose.win10.yaml -f docker-compose.sonar.yaml up -d (для Windows 10)

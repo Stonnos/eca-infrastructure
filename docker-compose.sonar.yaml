@@ -1,0 +1,28 @@
+version: '3.5'
+services:
+
+  sonarqube:
+    image: sonarqube
+    container_name: sonarqube
+    environment:
+      SONARQUBE_JDBC_USERNAME: ${SONARQUBE_DB_USERNAME}
+      SONARQUBE_JDBC_PASSWORD: ${SONARQUBE_DB_PASSWORD}
+      SONARQUBE_JDBC_URL: ${SONARQUBE_DB_URL}
+    ports:
+      - "9000:9000"
+    depends_on:
+      - sonar-db
+
+  sonar-db:
+    image: postgres:9.6.9
+    container_name: sonar-db
+    environment:
+      POSTGRES_USER: ${SONARQUBE_DB_USERNAME}
+      POSTGRES_PASSWORD: ${SONARQUBE_DB_PASSWORD}
+      POSTGRES_DB: ${SONARQUBE_DB}
+    volumes:
+      - sonar-db-pgdata:/var/lib/postgresql/data
+
+volumes:
+  sonar-db-pgdata:
+    name: sonar-db-pgdata
