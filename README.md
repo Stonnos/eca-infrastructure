@@ -18,6 +18,10 @@
 * POSTGRES_USER - логин пользователя БД
 * POSTGRES_PASSWORD - пароль пользователя БД
 * DB_CONTAINER_WAIT_TIMEOUT - время таймаута в сек. (переменная для скрипта wait-fot-it.sh)
+* SONARQUBE_DB_USERNAME - логин пользователя в БД SonarQube
+* SONARQUBE_DB_PASSWORD - пароль пользователя в БД SonarQube
+* SONARQUBE_DB_URL - url БД SonarQube
+* SONARQUBE_DB - имя БД SonarQube
 
 Инструкция по развертыванию
 ----------------------------------------
@@ -43,13 +47,13 @@
 
     docker-compose -f docker-compose.yaml -f docker-compose.win10.yaml up -d (для Windows 10)
 
-ВАЖНО! Данную команду необходимо выполнять из корневой папки проекта.
+    ВАЖНО! Данную команду необходимо выполнять из корневой папки проекта.
 
-Для остановки приложения (удаления контейнеров) нужно выполнить команду:
+    Для остановки приложения (удаления контейнеров) нужно выполнить команду:
 
-docker-compose down (для ОС семейства Linux)
+    docker-compose down (для ОС семейства Linux)
 
-docker-compose -f docker-compose.yaml -f docker-compose.win10.yaml down (для Windows 10)
+    docker-compose -f docker-compose.yaml -f docker-compose.win10.yaml down (для Windows 10)
 
 5. Для развертывания вместе с SonarQube необходимо использовать команду:
 
