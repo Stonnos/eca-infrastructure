@@ -56,3 +56,7 @@ docker-compose -f docker-compose.yaml -f docker-compose.win10.yaml down (для 
     docker-compose -f docker-compose.yaml -f docker-compose.sonar.yaml up -d (для ОС семейства Linux)
 
     docker-compose -f docker-compose.yaml -f docker-compose.win10.yaml -f docker-compose.sonar.yaml up -d (для Windows 10)
+    
+6. Для того, чтобы опубликовать результаты анализа кода в SonarQube, необходимо из корневой папки проекта выполнить команду:
+
+    mvn sonar:sonar -Dsonar.host.url=<SONAR_URL> -Dsonar.login=<USERNAME> -Dsonar.password=<PASSWORD> -Dsonar.projectName=<PROJECT_NAME>
