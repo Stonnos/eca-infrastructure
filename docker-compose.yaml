@@ -146,16 +146,16 @@ services:
       - /home/elasticsearch/data:/usr/share/elasticsearch/data:rw
 
   kibana:
-    container_name: kibana
     image: docker.elastic.co/kibana/kibana:${ES_VERSION}
+    container_name: kibana
     ports:
       - "5601:5601"
     depends_on:
       - elasticsearch
 
   filebeat:
-    container_name: filebeat
     image: docker.elastic.co/beats/filebeat:${ES_VERSION}
+    container_name: filebeat
     volumes:
       - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
       - /var/lib/docker/containers:/var/lib/docker/containers:ro

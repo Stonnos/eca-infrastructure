@@ -23,7 +23,7 @@
 * SONARQUBE_DB_URL - url БД SonarQube
 * SONARQUBE_DB - имя БД SonarQube
 * POSTGRES_VERSION - версия PostgreSQL
-* ES_VERSION - вервия Elasticsearch + Kibana + Filebeat
+* ES_VERSION - версия Elasticsearch + Kibana + Filebeat
 
 Инструкция по развертыванию
 ----------------------------------------
