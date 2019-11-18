@@ -2,7 +2,7 @@ version: '3.5'
 services:
 
   eca-db:
-    image: postgres:9.6.9
+    image: postgres:${POSTGRES_VERSION}
     container_name: eca-db
     volumes:
       - ./scripts/eca-db-postgresinit.sql:/docker-entrypoint-initdb.d/postgresinit.sql
@@ -16,7 +16,7 @@ services:
       PGTZ: "Asia/Novosibirsk"
 
   notification-db:
-    image: postgres:9.6.9
+    image: postgres:${POSTGRES_VERSION}
     container_name: notification-db
     volumes:
       - ./scripts/notification-db-postgresinit.sql:/docker-entrypoint-initdb.d/postgresinit.sql
@@ -30,7 +30,7 @@ services:
       PGTZ: "Asia/Novosibirsk"
 
   ers-db:
-    image: postgres:9.6.9
+    image: postgres:${POSTGRES_VERSION}
     container_name: ers-db
     volumes:
       - ./scripts/ers-db-postgresinit.sql:/docker-entrypoint-initdb.d/postgresinit.sql
@@ -56,6 +56,9 @@ services:
     depends_on:
       - eca-db
       - monitoring
+    labels:
+      collect_logs_with_filebeat: "true"
+      decode_log_event_to_json_object: "true"
 
   eca-oauth:
     image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:eca-oauth
@@ -67,6 +70,9 @@ services:
     depends_on:
       - eca-db
       - monitoring
+    labels:
+      collect_logs_with_filebeat: "true"
+      decode_log_event_to_json_object: "true"
 
   eca-web:
     image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:eca-web
@@ -84,6 +90,9 @@ services:
       TZ: "Asia/Novosibirsk"
     ports:
       - "8080:8080"
+    labels:
+      collect_logs_with_filebeat: "true"
+      decode_log_event_to_json_object: "true"
 
   monitoring:
     image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:monitoring
@@ -92,6 +101,9 @@ services:
       TZ: "Asia/Novosibirsk"
     ports:
       - "8085:8080"
+    labels:
+      collect_logs_with_filebeat: "true"
+      decode_log_event_to_json_object: "true"
 
   notification-service:
     image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:notification-service
@@ -104,6 +116,9 @@ services:
       - "8082:8080"
     depends_on:
       - notification-db
+    labels:
+      collect_logs_with_filebeat: "true"
+      decode_log_event_to_json_object: "true"
 
   evaluation-results-service:
     image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:evaluation-results-service
@@ -116,3 +131,34 @@ services:
       - "8081:8080"
     depends_on:
       - ers-db
+    labels:
+      collect_logs_with_filebeat: "true"
+      decode_log_event_to_json_object: "true"
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:${ES_VERSION}
+    container_name: elasticsearch
+    ports:
+      - "9200:9200"
+    environment:
+      - "discovery.type=single-node"
+    volumes:
+      - /home/elasticsearch/data:/usr/share/elasticsearch/data:rw
+
+  kibana:
+    container_name: kibana
+    image: docker.elastic.co/kibana/kibana:${ES_VERSION}
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
+
+  filebeat:
+    container_name: filebeat
+    image: docker.elastic.co/beats/filebeat:${ES_VERSION}
+    volumes:
+      - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /home/filebeat/data:/usr/share/filebeat/data:rw
+    user: root

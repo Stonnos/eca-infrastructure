@@ -17,6 +17,14 @@ services:
     volumes:
       - experiment-data:/home/experiment
 
+  elasticsearch:
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data:rw
+
+  filebeat:
+    volumes:
+      - filebeat-data:/usr/share/filebeat/data:rw
+
 volumes:
   eca-pgdata:
     name: eca-pgdata
@@ -26,3 +34,7 @@ volumes:
     name: ers-pgdata
   experiment-data:
     name: experiment-data
+  elasticsearch-data:
+    name: elasticsearch-data
+  filebeat-data:
+    name: filebeat-data

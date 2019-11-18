@@ -14,7 +14,7 @@ services:
       - sonar-db
 
   sonar-db:
-    image: postgres:9.6.9
+    image: postgres:${POSTGRES_VERSION}
     container_name: sonar-db
     environment:
       POSTGRES_USER: ${SONARQUBE_DB_USERNAME}
