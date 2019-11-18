@@ -15,7 +15,7 @@ services:
 
   eca-server:
     volumes:
-      - experiment-data:/experiment:/home/experiment
+      - experiment-data:/home/experiment
 
 volumes:
   eca-pgdata:
