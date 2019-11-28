@@ -88,6 +88,7 @@ services:
     container_name: zuul-gate
     environment:
       TZ: "Asia/Novosibirsk"
+      SPRING_PROFILES_ACTIVE: "docker"
     ports:
       - "8080:8080"
     labels:
@@ -99,6 +100,7 @@ services:
     container_name: monitoring
     environment:
       TZ: "Asia/Novosibirsk"
+      SPRING_PROFILES_ACTIVE: "docker"
     ports:
       - "8085:8080"
     labels:
