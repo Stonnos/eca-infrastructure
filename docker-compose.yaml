@@ -95,6 +95,9 @@ services:
       SPRING_PROFILES_ACTIVE: "docker"
     depends_on:
       - eca-server
+    labels:
+      collect_logs_with_filebeat: "true"
+      decode_log_event_to_json_object: "true"
 
   zuul-gate:
     image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:zuul-gate
