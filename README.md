@@ -35,7 +35,7 @@
 
 2. Войти в реестр docker с помощью команды:
    
-   docker login -u <LOGIN> -p <PASSWORD>
+   docker login -u LOGIN -p PASSWORD
 
 3. Скачать все образы из docker registry с помощью команды:
    
