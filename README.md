@@ -3,7 +3,7 @@
 
 Описание
 ----------------------------------------
-Данный модуль предназначен для развертывания всей инфраструктуры проектов ECA с помощью docker.
+Данный модуль предназначен для развертывания всей инфраструктуры ECA с помощью docker.
 
 Необходимый софт
 ----------------------------------------
@@ -18,10 +18,6 @@
 * POSTGRES_USER - логин пользователя БД
 * POSTGRES_PASSWORD - пароль пользователя БД
 * DB_CONTAINER_WAIT_TIMEOUT - время таймаута в сек. (переменная для скрипта wait-fot-it.sh)
-* SONARQUBE_DB_USERNAME - логин пользователя в БД SonarQube
-* SONARQUBE_DB_PASSWORD - пароль пользователя в БД SonarQube
-* SONARQUBE_DB_URL - url БД SonarQube
-* SONARQUBE_DB - имя БД SonarQube
 * POSTGRES_VERSION - версия PostgreSQL
 * ES_VERSION - версия Elasticsearch + Kibana + Filebeat
 
@@ -56,13 +52,3 @@
     docker-compose down (для ОС семейства Linux)
 
     docker-compose -f docker-compose.yaml -f docker-compose.win10.yaml down (для Windows 10)
-
-5. Для развертывания вместе с SonarQube необходимо использовать команду:
-
-    docker-compose -f docker-compose.yaml -f docker-compose.sonar.yaml up -d (для ОС семейства Linux)
-
-    docker-compose -f docker-compose.yaml -f docker-compose.win10.yaml -f docker-compose.sonar.yaml up -d (для Windows 10)
-    
-6. Для того, чтобы опубликовать результаты анализа кода в SonarQube, необходимо из корневой папки проекта выполнить команду:
-
-    mvn sonar:sonar -Dsonar.host.url=<SONAR_URL> -Dsonar.login=<USERNAME> -Dsonar.password=<PASSWORD> -Dsonar.projectName=<PROJECT_NAME>
