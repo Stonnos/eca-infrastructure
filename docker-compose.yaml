@@ -43,6 +43,18 @@ services:
       TZ: "Asia/Novosibirsk"
       PGTZ: "Asia/Novosibirsk"
 
+  rabbitmq:
+    image: "rabbitmq:3-management"
+    container_name: "rabbit"
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    volumes:
+      - ./conf/rabbitmq.conf:/etc/rabbitmq/rabbitmq.config
+      - /home/rabbit-data:/var/lib/rabbitmq
+    environment:
+      TZ: "Asia/Novosibirsk"
+
   eca-server:
     image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:eca-server
     container_name: eca-server
@@ -55,6 +67,7 @@ services:
       SPRING_PROFILES_ACTIVE: "docker"
     depends_on:
       - eca-db
+      - rabbitmq
       - monitoring
     labels:
       collect_logs_with_filebeat: "true"
@@ -82,6 +95,9 @@ services:
       SPRING_PROFILES_ACTIVE: "docker"
     depends_on:
       - eca-server
+    labels:
+      collect_logs_with_filebeat: "true"
+      decode_log_event_to_json_object: "true"
 
   zuul-gate:
     image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:zuul-gate

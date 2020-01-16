@@ -13,6 +13,10 @@ services:
     volumes:
       - ers-pgdata:/var/lib/postgresql/data
 
+  rabbitmq:
+    volumes:
+      - rabbit-data:/var/lib/rabbitmq
+
   eca-server:
     volumes:
       - experiment-data:/home/experiment
@@ -28,6 +32,8 @@ services:
 volumes:
   eca-pgdata:
     name: eca-pgdata
+  rabbit-data:
+    name: rabbit-data
   notification-pgdata:
     name: notification-pgdata
   ers-pgdata:
