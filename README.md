@@ -35,20 +35,14 @@
 
 3. Скачать все образы из docker registry с помощью команды:
    
-   docker-compose pull (для ОС семейства Linux)
-   
-   docker-compose -f docker-compose.yaml -f docker-compose.win10.yaml pull (для Windows 10)
+   docker-compose pull
    
 4. Создать и запустить docker контейнеры с помощью команды:
 
-    docker-compose up -d (для ОС семейства Linux)
-
-    docker-compose -f docker-compose.yaml -f docker-compose.win10.yaml up -d (для Windows 10)
+    docker-compose up -d
 
     ВАЖНО! Данную команду необходимо выполнять из корневой папки проекта.
 
     Для остановки приложения (удаления контейнеров) нужно выполнить команду:
 
-    docker-compose down (для ОС семейства Linux)
-
-    docker-compose -f docker-compose.yaml -f docker-compose.win10.yaml down (для Windows 10)
+    docker-compose down
