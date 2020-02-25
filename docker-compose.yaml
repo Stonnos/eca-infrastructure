@@ -125,7 +125,7 @@ services:
   notification-service:
     image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:notification-service
     container_name: notification-service
-    command: ["/wait-for-it.sh", "notification-db:5432", "--timeout=${DB_CONTAINER_WAIT_TIMEOUT}", "--", "catalina.sh", "run"]
+    command: ["/wait-for-it.sh", "notification-db:5432", "--timeout=${DB_CONTAINER_WAIT_TIMEOUT}", "--", "java", "-jar", "notification-service.war"]
     environment:
       TZ: "Asia/Novosibirsk"
       SPRING_PROFILES_ACTIVE: "docker"
@@ -140,7 +140,7 @@ services:
   evaluation-results-service:
     image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:evaluation-results-service
     container_name: evaluation-results-service
-    command: ["/wait-for-it.sh", "ers-db:5432", "--timeout=${DB_CONTAINER_WAIT_TIMEOUT}", "--", "catalina.sh", "run"]
+    command: ["/wait-for-it.sh", "ers-db:5432", "--timeout=${DB_CONTAINER_WAIT_TIMEOUT}", "--", "java", "-jar", "evaluation-results-service.war"]
     environment:
       TZ: "Asia/Novosibirsk"
       SPRING_PROFILES_ACTIVE: "docker"
