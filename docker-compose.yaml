@@ -6,7 +6,7 @@ services:
     container_name: eca-db
     volumes:
       - ./scripts/eca-db-postgresinit.sql:/docker-entrypoint-initdb.d/postgresinit.sql
-      - /home/eca-pgdata:/var/lib/postgresql/data
+      - eca-pgdata:/var/lib/postgresql/data
     ports:
       - "5433:5432"
     environment:
@@ -20,7 +20,7 @@ services:
     container_name: notification-db
     volumes:
       - ./scripts/notification-db-postgresinit.sql:/docker-entrypoint-initdb.d/postgresinit.sql
-      - /home/notification-pgdata:/var/lib/postgresql/data
+      - notification-pgdata:/var/lib/postgresql/data
     ports:
       - "5435:5432"
     environment:
@@ -34,7 +34,7 @@ services:
     container_name: ers-db
     volumes:
       - ./scripts/ers-db-postgresinit.sql:/docker-entrypoint-initdb.d/postgresinit.sql
-      - /home/ers-pgdata:/var/lib/postgresql/data
+      - ers-pgdata:/var/lib/postgresql/data
     ports:
       - "5434:5432"
     environment:
@@ -51,7 +51,7 @@ services:
       - "5672:5672"
     volumes:
       - ./conf/rabbitmq.conf:/etc/rabbitmq/rabbitmq.config
-      - /home/rabbit-data:/var/lib/rabbitmq
+      - rabbit-data:/var/lib/rabbitmq
     environment:
       TZ: "Asia/Novosibirsk"
 
@@ -60,8 +60,7 @@ services:
     container_name: eca-server
     command: ["/wait-for-it.sh", "eca-db:5432", "--timeout=${DB_CONTAINER_WAIT_TIMEOUT}", "--", "catalina.sh", "run"]
     volumes:
-      - /home/experiment:/home/experiment
-      - /home/experiment/data:/home/experiment/data
+      - experiment-data:/home/experiment
     environment:
       TZ: "Asia/Novosibirsk"
       SPRING_PROFILES_ACTIVE: "docker"
@@ -161,7 +160,7 @@ services:
     environment:
       - "discovery.type=single-node"
     volumes:
-      - /home/elasticsearch/data:/usr/share/elasticsearch/data:rw
+      - elasticsearch-data:/usr/share/elasticsearch/data:rw
 
   kibana:
     image: docker.elastic.co/kibana/kibana:${ES_VERSION}
@@ -178,5 +177,21 @@ services:
       - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /home/filebeat/data:/usr/share/filebeat/data:rw
+      - filebeat-data:/usr/share/filebeat/data:rw
     user: root
+
+volumes:
+  eca-pgdata:
+    name: eca-pgdata
+  rabbit-data:
+    name: rabbit-data
+  notification-pgdata:
+    name: notification-pgdata
+  ers-pgdata:
+    name: ers-pgdata
+  experiment-data:
+    name: experiment-data
+  elasticsearch-data:
+    name: elasticsearch-data
+  filebeat-data:
+    name: filebeat-data
