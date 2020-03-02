@@ -10,6 +10,25 @@ alerting:
       - targets: ['alertmanager:9093']
 
 scrape_configs:
+  - job_name: 'eca-oauth'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['eca-oauth:8080/eca-oauth']
+  - job_name: 'eca-server'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['eca-server:8080/eca-server']
+  - job_name: 'eca-web'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['eca-web:8080']
+  - job_name: 'evaluation-results-service'
+    metrics_path: '/actuator/prometheus'
+    scheme: https
+    tls_config:
+       insecure_skip_verify: true
+    static_configs:
+      - targets: ['evaluation-results-service:8443']
   - job_name: 'notification-service'
     metrics_path: '/actuator/prometheus'
     scheme: https
