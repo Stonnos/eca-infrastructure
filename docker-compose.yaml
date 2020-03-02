@@ -110,18 +110,6 @@ services:
       collect_logs_with_filebeat: "true"
       decode_log_event_to_json_object: "true"
 
-  monitoring:
-    image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:monitoring
-    container_name: monitoring
-    environment:
-      TZ: "Asia/Novosibirsk"
-      SPRING_PROFILES_ACTIVE: "docker"
-    ports:
-      - "8085:8080"
-    labels:
-      collect_logs_with_filebeat: "true"
-      decode_log_event_to_json_object: "true"
-
   notification-service:
     image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:notification-service
     container_name: notification-service
