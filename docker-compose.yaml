@@ -67,7 +67,6 @@ services:
     depends_on:
       - eca-db
       - rabbitmq
-      - monitoring
     labels:
       collect_logs_with_filebeat: "true"
       decode_log_event_to_json_object: "true"
@@ -81,7 +80,6 @@ services:
       SPRING_PROFILES_ACTIVE: "docker"
     depends_on:
       - eca-db
-      - monitoring
     labels:
       collect_logs_with_filebeat: "true"
       decode_log_event_to_json_object: "true"
