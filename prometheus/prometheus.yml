@@ -28,7 +28,7 @@ scrape_configs:
     tls_config:
        insecure_skip_verify: true
     static_configs:
-      - targets: ['evaluation-results-service:8443']
+      - targets: ['evaluation-results-service:9443']
   - job_name: 'notification-service'
     metrics_path: '/actuator/prometheus'
     scheme: https
