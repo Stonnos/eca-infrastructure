@@ -22,6 +22,9 @@
 * GRAFANA_PASSWORD - ПАРОЛЬ ПОЛЬЗОВАТЕЛЯ Grafana
 * POSTGRES_VERSION - версия PostgreSQL
 * ES_VERSION - версия Elasticsearch + Kibana + Filebeat
+* PROMETHEUS_VERSION - версия Prometheus
+* ALERTMANAGER_VERSION - версия Alert manager
+* GRAFANA_VERSION - версия Grafana
 
 Инструкция по развертыванию
 ----------------------------------------

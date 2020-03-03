@@ -173,7 +173,7 @@ services:
     user: root
 
   prometheus:
-    image: prom/prometheus
+    image: prom/prometheus:${PROMETHEUS_VERSION}
     container_name: prometheus
     environment:
       TZ: "Asia/Novosibirsk"
@@ -189,7 +189,7 @@ services:
       - "--web.console.templates=/usr/share/prometheus/consoles"
 
   alertmanager:
-    image: prom/alertmanager
+    image: prom/alertmanager:${ALERTMANAGER_VERSION}
     container_name: alertmanager
     environment:
       TZ: "Asia/Novosibirsk"
@@ -199,7 +199,7 @@ services:
       - ./alertmanager/:/etc/alertmanager/
 
   grafana:
-    image: grafana/grafana
+    image: grafana/grafana:${GRAFANA_VERSION}
     container_name: grafana
     environment:
       TZ: "Asia/Novosibirsk"
