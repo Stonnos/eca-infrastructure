@@ -19,7 +19,7 @@
 * POSTGRES_PASSWORD - пароль пользователя БД
 * DB_CONTAINER_WAIT_TIMEOUT - время таймаута в сек. (переменная для скрипта wait-fot-it.sh)
 * GRAFANA_LOGIN - логин пользователя Grafana
-* GRAFANA_PASSWORD - ПАРОЛЬ ПОЛЬЗОВАТЕЛЯ Grafana
+* GRAFANA_PASSWORD - пароль пользователя Grafana
 * POSTGRES_VERSION - версия PostgreSQL
 * ES_VERSION - версия Elasticsearch + Kibana + Filebeat
 * PROMETHEUS_VERSION - версия Prometheus
