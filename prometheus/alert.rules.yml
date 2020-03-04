@@ -1,7 +1,7 @@
 groups:
   - name: eca-admin
     rules:
-      - alert: service_down
+      - alert: ServiceDown
         expr: up == 0
         for: 10s
         labels:
