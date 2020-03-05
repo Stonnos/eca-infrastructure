@@ -13,11 +13,14 @@
 Описание ключевой конфигурации модуля
 ----------------------------------------
 Переменные окружения (env variables):
+* TIME_ZONE - тайм зона для контейнера
 * DOCKER_REPOSITORY - docker репозиторий в docker hub
 * DOCKER_USERNAME - docker логин
-* POSTGRES_USER - логин пользователя БД
-* POSTGRES_PASSWORD - пароль пользователя БД
-* DB_CONTAINER_WAIT_TIMEOUT - время таймаута в сек. (переменная для скрипта wait-fot-it.sh)
+* POSTGRES_URI - URI PostgreSQL БД
+* POSTGRES_USER - логин пользователя PostgreSQL БД
+* POSTGRES_PASSWORD - пароль пользователя PostgreSQL БД
+* DB_CONTAINER_WAIT_TIMEOUT - таймаут ожидания старта контейнера в сек. (переменная для скрипта wait-fot-it.sh)
+* PG_EXPORTER_DATASOURCE_URI - URI БД для postgres exporter
 * GRAFANA_LOGIN - логин пользователя Grafana
 * GRAFANA_PASSWORD - пароль пользователя Grafana
 * POSTGRES_VERSION - версия PostgreSQL
