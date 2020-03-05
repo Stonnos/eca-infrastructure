@@ -35,7 +35,7 @@ services:
       - experiment-data:/home/experiment
     environment:
       TZ: ${TIME_ZONE}
-      SPRING_PROFILES_ACTIVE: "docker"
+      SPRING_PROFILES_ACTIVE: "docker-prod"
     depends_on:
       - postgres-db
       - rabbitmq
@@ -49,7 +49,7 @@ services:
     command: ["/wait-for-it.sh", "${POSTGRES_URI}", "--timeout=${DB_CONTAINER_WAIT_TIMEOUT}", "--", "catalina.sh", "run"]
     environment:
       TZ: ${TIME_ZONE}
-      SPRING_PROFILES_ACTIVE: "docker"
+      SPRING_PROFILES_ACTIVE: "docker-prod"
     depends_on:
       - postgres-db
     labels:
@@ -61,7 +61,7 @@ services:
     container_name: eca-web
     environment:
       TZ: ${TIME_ZONE}
-      SPRING_PROFILES_ACTIVE: "docker"
+      SPRING_PROFILES_ACTIVE: "docker-prod"
     depends_on:
       - eca-server
     labels:
@@ -73,7 +73,7 @@ services:
     container_name: zuul-gate
     environment:
       TZ: ${TIME_ZONE}
-      SPRING_PROFILES_ACTIVE: "docker"
+      SPRING_PROFILES_ACTIVE: "docker-prod"
     ports:
       - "8080:8080"
     labels:
@@ -86,7 +86,7 @@ services:
     command: ["/wait-for-it.sh", "${POSTGRES_URI}", "--timeout=${DB_CONTAINER_WAIT_TIMEOUT}", "--", "java", "-jar", "notification-service.war"]
     environment:
       TZ: ${TIME_ZONE}
-      SPRING_PROFILES_ACTIVE: "docker"
+      SPRING_PROFILES_ACTIVE: "docker-prod"
     ports:
       - "8443:8443"
     depends_on:
@@ -101,7 +101,7 @@ services:
     command: ["/wait-for-it.sh", "${POSTGRES_URI}", "--timeout=${DB_CONTAINER_WAIT_TIMEOUT}", "--", "java", "-jar", "evaluation-results-service.war"]
     environment:
       TZ: ${TIME_ZONE}
-      SPRING_PROFILES_ACTIVE: "docker"
+      SPRING_PROFILES_ACTIVE: "docker-prod"
     ports:
       - "9443:9443"
     depends_on:
