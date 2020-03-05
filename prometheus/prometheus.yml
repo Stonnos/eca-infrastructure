@@ -14,13 +14,13 @@ scrape_configs:
     static_configs:
       - targets: ['postgres-exporter:9187']
   - job_name: 'eca-oauth'
-    metrics_path: '/actuator/prometheus'
+    metrics_path: '/eca-oauth/actuator/prometheus'
     static_configs:
-      - targets: ['eca-oauth:8080/eca-oauth']
+      - targets: ['eca-oauth:8080']
   - job_name: 'eca-server'
-    metrics_path: '/actuator/prometheus'
+    metrics_path: '/eca-server/actuator/prometheus'
     static_configs:
-      - targets: ['eca-server:8080/eca-server']
+      - targets: ['eca-server:8080']
   - job_name: 'eca-web'
     metrics_path: '/actuator/prometheus'
     static_configs:
