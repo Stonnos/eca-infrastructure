@@ -30,7 +30,7 @@ services:
   eca-server:
     image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:eca-server
     container_name: eca-server
-    command: ["/wait-for-it.sh", "postgres-db:5432", "--timeout=${DB_CONTAINER_WAIT_TIMEOUT}", "--", "catalina.sh", "run"]
+    command: ["/wait-for-it.sh", "${POSTGRES_URI}", "--timeout=${DB_CONTAINER_WAIT_TIMEOUT}", "--", "catalina.sh", "run"]
     volumes:
       - experiment-data:/home/experiment
     environment:
@@ -46,7 +46,7 @@ services:
   eca-oauth:
     image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:eca-oauth
     container_name: eca-oauth
-    command: ["/wait-for-it.sh", "postgres-db:5432", "--timeout=${DB_CONTAINER_WAIT_TIMEOUT}", "--", "catalina.sh", "run"]
+    command: ["/wait-for-it.sh", "${POSTGRES_URI}", "--timeout=${DB_CONTAINER_WAIT_TIMEOUT}", "--", "catalina.sh", "run"]
     environment:
       TZ: ${TIME_ZONE}
       SPRING_PROFILES_ACTIVE: "docker"
@@ -83,7 +83,7 @@ services:
   notification-service:
     image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:notification-service
     container_name: notification-service
-    command: ["/wait-for-it.sh", "postgres-db:5432", "--timeout=${DB_CONTAINER_WAIT_TIMEOUT}", "--", "java", "-jar", "notification-service.war"]
+    command: ["/wait-for-it.sh", "${POSTGRES_URI}", "--timeout=${DB_CONTAINER_WAIT_TIMEOUT}", "--", "java", "-jar", "notification-service.war"]
     environment:
       TZ: ${TIME_ZONE}
       SPRING_PROFILES_ACTIVE: "docker"
@@ -98,7 +98,7 @@ services:
   evaluation-results-service:
     image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:evaluation-results-service
     container_name: evaluation-results-service
-    command: ["/wait-for-it.sh", "postgres-db:5432", "--timeout=${DB_CONTAINER_WAIT_TIMEOUT}", "--", "java", "-jar", "evaluation-results-service.war"]
+    command: ["/wait-for-it.sh", "${POSTGRES_URI}", "--timeout=${DB_CONTAINER_WAIT_TIMEOUT}", "--", "java", "-jar", "evaluation-results-service.war"]
     environment:
       TZ: ${TIME_ZONE}
       SPRING_PROFILES_ACTIVE: "docker"
@@ -177,7 +177,7 @@ services:
       - "9187:9187"
     environment:
       TZ: ${TIME_ZONE}
-      DATA_SOURCE_URI: ${PG_EXPORTER_URI}
+      DATA_SOURCE_URI: ${PG_EXPORTER_DATASOURCE_URI}
       DATA_SOURCE_USER: ${POSTGRES_USER}
       DATA_SOURCE_PASS: ${POSTGRES_PASSWORD}
     depends_on:
