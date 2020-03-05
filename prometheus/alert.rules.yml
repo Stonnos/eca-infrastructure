@@ -1,5 +1,5 @@
 groups:
-  - name: alert-rules
+  - name: eca-admin
     rules:
       - alert: ServiceDown
         expr: up == 0
