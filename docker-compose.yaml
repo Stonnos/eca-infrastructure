@@ -198,6 +198,19 @@ services:
     volumes:
       - ./alertmanager/:/etc/alertmanager/
 
+  postgres-exporter:
+    image: wrouesnel/postgres_exporter
+    container_name: postgres-exporter
+    ports:
+      - "9187:9187"
+    environment:
+      TZ: "Asia/Novosibirsk"
+      DATA_SOURCE_URI: ${PG_EXPORTER_URI}
+      DATA_SOURCE_USER: postgres
+      DATA_SOURCE_PASS: postgres
+    depends_on:
+      - notification-db
+
   grafana:
     image: grafana/grafana:${GRAFANA_VERSION}
     container_name: grafana
