@@ -159,6 +159,7 @@ services:
       - "--storage.tsdb.path=/prometheus"
       - "--web.console.libraries=/usr/share/prometheus/console_libraries"
       - "--web.console.templates=/usr/share/prometheus/consoles"
+      - "--web.external-url=${PROMETHEUS_EXTERNAL_URL}"
 
   alertmanager:
     image: prom/alertmanager:${ALERTMANAGER_VERSION}
@@ -169,6 +170,9 @@ services:
       - "9093:9093"
     volumes:
       - ./alertmanager/:/etc/alertmanager/
+    command:
+      - "--config.file=/etc/alertmanager/alertmanager.yml"
+      - "--web.external-url=${ALERT_MANAGER_EXTERNAL_URL}"
 
   postgres-exporter:
     image: wrouesnel/postgres_exporter

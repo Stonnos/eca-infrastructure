@@ -28,6 +28,8 @@
 * PROMETHEUS_VERSION - версия Prometheus
 * ALERTMANAGER_VERSION - версия Alert manager
 * GRAFANA_VERSION - версия Grafana
+* PROMETHEUS_EXTERNAL_URL - внешний url для Prometheus
+* ALERT_MANAGER_EXTERNAL_URL - внешний url для Alert manager
 
 Инструкция по развертыванию
 ----------------------------------------
