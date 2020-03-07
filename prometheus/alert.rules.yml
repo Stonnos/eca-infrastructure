@@ -3,7 +3,7 @@ groups:
     rules:
       - alert: ServiceDown
         expr: up == 0
-        for: 10s
+        for: 5m
         labels:
           severity: page
         annotations:
@@ -11,7 +11,7 @@ groups:
           description: '{{ $labels.instance }} has been down for more than 10 seconds.'
       - alert: PostgreSQLDown
         expr: pg_up != 1
-        for: 10s
+        for: 5m
         labels:
           severity: email
         annotations:
