@@ -1,73 +1,44 @@
-version: '3.5'
+version: "3.5"
 services:
 
-  eca-db:
+  postgres-db:
     image: postgres:${POSTGRES_VERSION}
-    container_name: eca-db
+    container_name: postgres-db
     volumes:
-      - ./scripts/eca-db-postgresinit.sql:/docker-entrypoint-initdb.d/postgresinit.sql
-      - eca-pgdata:/var/lib/postgresql/data
+      - ./scripts/postgresinit.sql:/docker-entrypoint-initdb.d/postgresinit.sql
+      - postgres-data:/var/lib/postgresql/data
     ports:
       - "5433:5432"
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      TZ: "Asia/Novosibirsk"
-      PGTZ: "Asia/Novosibirsk"
-
-  notification-db:
-    image: postgres:${POSTGRES_VERSION}
-    container_name: notification-db
-    volumes:
-      - ./scripts/notification-db-postgresinit.sql:/docker-entrypoint-initdb.d/postgresinit.sql
-      - notification-pgdata:/var/lib/postgresql/data
-    ports:
-      - "5435:5432"
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      TZ: "Asia/Novosibirsk"
-      PGTZ: "Asia/Novosibirsk"
-
-  ers-db:
-    image: postgres:${POSTGRES_VERSION}
-    container_name: ers-db
-    volumes:
-      - ./scripts/ers-db-postgresinit.sql:/docker-entrypoint-initdb.d/postgresinit.sql
-      - ers-pgdata:/var/lib/postgresql/data
-    ports:
-      - "5434:5432"
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      TZ: "Asia/Novosibirsk"
-      PGTZ: "Asia/Novosibirsk"
+      TZ: ${TIME_ZONE}
+      PGTZ: ${TIME_ZONE}
 
   rabbitmq:
     image: "rabbitmq:3-management"
-    container_name: "rabbit"
+    container_name: "rabbitmq"
     ports:
       - "15672:15672"
       - "5672:5672"
     volumes:
-      - ./conf/rabbitmq.conf:/etc/rabbitmq/rabbitmq.config
+      - ./rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.config
       - rabbit-data:/var/lib/rabbitmq
     environment:
-      TZ: "Asia/Novosibirsk"
+      TZ: ${TIME_ZONE}
 
   eca-server:
     image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:eca-server
     container_name: eca-server
-    command: ["/wait-for-it.sh", "eca-db:5432", "--timeout=${DB_CONTAINER_WAIT_TIMEOUT}", "--", "catalina.sh", "run"]
+    command: ["/wait-for-it.sh", "${POSTGRES_URI}", "--timeout=${DB_CONTAINER_WAIT_TIMEOUT}", "--", "catalina.sh", "run"]
     volumes:
       - experiment-data:/home/experiment
     environment:
-      TZ: "Asia/Novosibirsk"
-      SPRING_PROFILES_ACTIVE: "docker"
+      TZ: ${TIME_ZONE}
+      SPRING_PROFILES_ACTIVE: "docker-prod"
     depends_on:
-      - eca-db
+      - postgres-db
       - rabbitmq
-      - monitoring
     labels:
       collect_logs_with_filebeat: "true"
       decode_log_event_to_json_object: "true"
@@ -75,13 +46,12 @@ services:
   eca-oauth:
     image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:eca-oauth
     container_name: eca-oauth
-    command: ["/wait-for-it.sh", "eca-db:5432", "--timeout=${DB_CONTAINER_WAIT_TIMEOUT}", "--", "catalina.sh", "run"]
+    command: ["/wait-for-it.sh", "${POSTGRES_URI}", "--timeout=${DB_CONTAINER_WAIT_TIMEOUT}", "--", "catalina.sh", "run"]
     environment:
-      TZ: "Asia/Novosibirsk"
-      SPRING_PROFILES_ACTIVE: "docker"
+      TZ: ${TIME_ZONE}
+      SPRING_PROFILES_ACTIVE: "docker-prod"
     depends_on:
-      - eca-db
-      - monitoring
+      - postgres-db
     labels:
       collect_logs_with_filebeat: "true"
       decode_log_event_to_json_object: "true"
@@ -90,8 +60,8 @@ services:
     image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:eca-web
     container_name: eca-web
     environment:
-      TZ: "Asia/Novosibirsk"
-      SPRING_PROFILES_ACTIVE: "docker"
+      TZ: ${TIME_ZONE}
+      SPRING_PROFILES_ACTIVE: "docker-prod"
     depends_on:
       - eca-server
     labels:
@@ -102,22 +72,10 @@ services:
     image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:zuul-gate
     container_name: zuul-gate
     environment:
-      TZ: "Asia/Novosibirsk"
-      SPRING_PROFILES_ACTIVE: "docker"
+      TZ: ${TIME_ZONE}
+      SPRING_PROFILES_ACTIVE: "docker-prod"
     ports:
       - "8080:8080"
-    labels:
-      collect_logs_with_filebeat: "true"
-      decode_log_event_to_json_object: "true"
-
-  monitoring:
-    image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:monitoring
-    container_name: monitoring
-    environment:
-      TZ: "Asia/Novosibirsk"
-      SPRING_PROFILES_ACTIVE: "docker"
-    ports:
-      - "8085:8080"
     labels:
       collect_logs_with_filebeat: "true"
       decode_log_event_to_json_object: "true"
@@ -125,14 +83,14 @@ services:
   notification-service:
     image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:notification-service
     container_name: notification-service
-    command: ["/wait-for-it.sh", "notification-db:5432", "--timeout=${DB_CONTAINER_WAIT_TIMEOUT}", "--", "java", "-jar", "notification-service.war"]
+    command: ["/wait-for-it.sh", "${POSTGRES_URI}", "--timeout=${DB_CONTAINER_WAIT_TIMEOUT}", "--", "java", "-jar", "notification-service.war"]
     environment:
-      TZ: "Asia/Novosibirsk"
-      SPRING_PROFILES_ACTIVE: "docker"
+      TZ: ${TIME_ZONE}
+      SPRING_PROFILES_ACTIVE: "docker-prod"
     ports:
       - "8443:8443"
     depends_on:
-      - notification-db
+      - postgres-db
     labels:
       collect_logs_with_filebeat: "true"
       decode_log_event_to_json_object: "true"
@@ -140,14 +98,14 @@ services:
   evaluation-results-service:
     image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:evaluation-results-service
     container_name: evaluation-results-service
-    command: ["/wait-for-it.sh", "ers-db:5432", "--timeout=${DB_CONTAINER_WAIT_TIMEOUT}", "--", "java", "-jar", "evaluation-results-service.war"]
+    command: ["/wait-for-it.sh", "${POSTGRES_URI}", "--timeout=${DB_CONTAINER_WAIT_TIMEOUT}", "--", "java", "-jar", "evaluation-results-service.war"]
     environment:
-      TZ: "Asia/Novosibirsk"
-      SPRING_PROFILES_ACTIVE: "docker"
+      TZ: ${TIME_ZONE}
+      SPRING_PROFILES_ACTIVE: "docker-prod"
     ports:
       - "9443:9443"
     depends_on:
-      - ers-db
+      - postgres-db
     labels:
       collect_logs_with_filebeat: "true"
       decode_log_event_to_json_object: "true"
@@ -155,6 +113,8 @@ services:
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:${ES_VERSION}
     container_name: elasticsearch
+    environment:
+      TZ: ${TIME_ZONE}
     ports:
       - "9200:9200"
     environment:
@@ -165,6 +125,8 @@ services:
   kibana:
     image: docker.elastic.co/kibana/kibana:${ES_VERSION}
     container_name: kibana
+    environment:
+      TZ: ${TIME_ZONE}
     ports:
       - "5601:5601"
     depends_on:
@@ -173,6 +135,8 @@ services:
   filebeat:
     image: docker.elastic.co/beats/filebeat:${ES_VERSION}
     container_name: filebeat
+    environment:
+      TZ: ${TIME_ZONE}
     volumes:
       - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
@@ -180,18 +144,77 @@ services:
       - filebeat-data:/usr/share/filebeat/data:rw
     user: root
 
+  prometheus:
+    image: prom/prometheus:${PROMETHEUS_VERSION}
+    container_name: prometheus
+    environment:
+      TZ: ${TIME_ZONE}
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/:/etc/prometheus/
+      - prometheus-data:/prometheus
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--web.console.libraries=/usr/share/prometheus/console_libraries"
+      - "--web.console.templates=/usr/share/prometheus/consoles"
+      - "--web.external-url=${PROMETHEUS_EXTERNAL_URL}"
+
+  alertmanager:
+    image: prom/alertmanager:${ALERTMANAGER_VERSION}
+    container_name: alertmanager
+    environment:
+      TZ: ${TIME_ZONE}
+    ports:
+      - "9093:9093"
+    volumes:
+      - ./alertmanager/:/etc/alertmanager/
+    command:
+      - "--config.file=/etc/alertmanager/alertmanager.yml"
+      - "--web.external-url=${ALERT_MANAGER_EXTERNAL_URL}"
+
+  postgres-exporter:
+    image: wrouesnel/postgres_exporter
+    container_name: postgres-exporter
+    ports:
+      - "9187:9187"
+    environment:
+      TZ: ${TIME_ZONE}
+      DATA_SOURCE_URI: ${PG_EXPORTER_DATASOURCE_URI}
+      DATA_SOURCE_USER: ${POSTGRES_USER}
+      DATA_SOURCE_PASS: ${POSTGRES_PASSWORD}
+    depends_on:
+      - postgres-db
+
+  grafana:
+    image: grafana/grafana:${GRAFANA_VERSION}
+    container_name: grafana
+    environment:
+      TZ: ${TIME_ZONE}
+      GF_SECURITY_ADMIN_USER: ${GRAFANA_LOGIN}
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASSWORD}
+      GF_USERS_ALLOW_SIGN_UP: "false"
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./grafana/provisioning/:/etc/grafana/provisioning/
+      - grafana-data:/var/lib/grafana
+    depends_on:
+      - prometheus
+
 volumes:
-  eca-pgdata:
-    name: eca-pgdata
+  postgres-data:
+    name: postgres-data
   rabbit-data:
     name: rabbit-data
-  notification-pgdata:
-    name: notification-pgdata
-  ers-pgdata:
-    name: ers-pgdata
   experiment-data:
     name: experiment-data
   elasticsearch-data:
     name: elasticsearch-data
   filebeat-data:
     name: filebeat-data
+  prometheus-data:
+    name: prometheus-data
+  grafana-data:
+    name: grafana-data

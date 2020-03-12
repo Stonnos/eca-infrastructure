@@ -1,0 +1,13 @@
+global:
+  smtp_smarthost: 'smtp.gmail.com:25'
+  smtp_from: 'rbatsw@gmail.com'
+  smtp_auth_username: 'rbatsw@gmail.com'
+  smtp_auth_password: 'czawqizcrdxfqlrv'
+
+route:
+  receiver: 'eca-admin'
+
+receivers:
+  - name: 'eca-admin'
+    email_configs:
+      - to: 'roman.batygin@mail.ru'

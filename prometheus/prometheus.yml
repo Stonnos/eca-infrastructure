@@ -1,0 +1,41 @@
+global:
+  scrape_interval: 10s
+
+rule_files:
+  - 'alert.rules.yml'
+
+alerting:
+  alertmanagers:
+    - static_configs:
+      - targets: ['alertmanager:9093']
+
+scrape_configs:
+  - job_name: 'postgres-exporter'
+    static_configs:
+      - targets: ['postgres-exporter:9187']
+  - job_name: 'eca-oauth'
+    metrics_path: '/eca-oauth/actuator/prometheus'
+    static_configs:
+      - targets: ['eca-oauth:8080']
+  - job_name: 'eca-server'
+    metrics_path: '/eca-server/actuator/prometheus'
+    static_configs:
+      - targets: ['eca-server:8080']
+  - job_name: 'eca-web'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['eca-web:8080']
+  - job_name: 'evaluation-results-service'
+    metrics_path: '/actuator/prometheus'
+    scheme: https
+    tls_config:
+       insecure_skip_verify: true
+    static_configs:
+      - targets: ['evaluation-results-service:9443']
+  - job_name: 'notification-service'
+    metrics_path: '/actuator/prometheus'
+    scheme: https
+    tls_config:
+       insecure_skip_verify: true
+    static_configs:
+      - targets: ['notification-service:8443']

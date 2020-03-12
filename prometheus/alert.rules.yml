@@ -1,0 +1,19 @@
+groups:
+  - name: eca-admin
+    rules:
+      - alert: ServiceDown
+        expr: up == 0
+        for: 5m
+        labels:
+          severity: page
+        annotations:
+          summary: 'Service {{ $labels.instance }} is unavailable.'
+          description: '{{ $labels.instance }} has been down for more than 5 minutes.'
+      - alert: PostgreSQLDown
+        expr: pg_up != 1
+        for: 5m
+        labels:
+          severity: email
+        annotations:
+          summary: 'PostgreSQL {{ $labels.instance }} is unavailable.'
+          description: '{{ $labels.instance }} has been down for more than 5 minutes.'
