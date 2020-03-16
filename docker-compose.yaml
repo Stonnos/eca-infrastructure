@@ -37,6 +37,7 @@ services:
     environment:
       TZ: ${TIME_ZONE}
       SPRING_PROFILES_ACTIVE: "docker-prod"
+      CATALINA_OPTS: "-Xmx2g"
     depends_on:
       - postgres-db
       - rabbitmq
