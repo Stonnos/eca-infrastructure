@@ -116,11 +116,10 @@ services:
     image: docker.elastic.co/elasticsearch/elasticsearch:${ES_VERSION}
     container_name: elasticsearch
     environment:
-      TZ: ${TIME_ZONE}
+      - "TZ=${TIME_ZONE}"
+      - "discovery.type=single-node"
     ports:
       - "9200:9200"
-    environment:
-      - "discovery.type=single-node"
     volumes:
       - elasticsearch-data:/usr/share/elasticsearch/data:rw
 
@@ -144,6 +143,8 @@ services:
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - filebeat-data:/usr/share/filebeat/data:rw
+    command:
+      - "-strict.perms=false"
     user: root
 
   prometheus:
