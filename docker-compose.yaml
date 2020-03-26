@@ -169,6 +169,9 @@ services:
     container_name: alertmanager
     environment:
       TZ: ${TIME_ZONE}
+      MAIL_ACCOUNT: "$MAIL_ACCOUNT"
+      MAIL_AUTH_TOKEN: "$MAIL_AUTH_TOKEN"
+      MAIL_RECEIVER_ACCOUNT: "$MAIL_RECEIVER_ACCOUNT"
     ports:
       - "9093:9093"
     volumes:
