@@ -44,9 +44,6 @@ services:
       SPRING_TOKENDATASOURCE_USERNAME: ${POSTGRES_USER}
       SPRING_TOKENDATASOURCE_PASSWORD:  ${POSTGRES_PASSWORD}
       SPRING_JPA_HIBERNATE_DDLAUTO: "validate"
-      SPRING_RABBITMQ_HOST: ${RABBITMQ_HOST}
-      EXPERIMENT_MAIL_URL: ${EXPERIMENT_MAIL_URL}
-      ERS_URL: ${ERS_URL}
       CATALINA_OPTS: "-Xmx2g"
     depends_on:
       - postgres-db
@@ -107,8 +104,6 @@ services:
       SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
       SPRING_DATASOURCE_PASSWORD:  ${POSTGRES_PASSWORD}
       SPRING_JPA_HIBERNATE_DDLAUTO: "validate"
-      SPRING_MAIL_USERNAME: ${MAIL_FROM_ACCOUNT}
-      SPRING_MAIL_PASSWORD: ${MAIL_AUTH_TOKEN}
     ports:
       - "8443:8443"
     depends_on:
@@ -193,9 +188,6 @@ services:
     container_name: alertmanager
     environment:
       TZ: ${TIME_ZONE}
-      MAIL_ACCOUNT: ${MAIL_FROM_ACCOUNT}
-      MAIL_AUTH_TOKEN: ${MAIL_AUTH_TOKEN}
-      MAIL_RECEIVER_ACCOUNT: ${MAIL_RECEIVER_ACCOUNT}
     ports:
       - "9093:9093"
     volumes:
