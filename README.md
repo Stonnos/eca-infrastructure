@@ -30,6 +30,13 @@
 * GRAFANA_VERSION - версия Grafana
 * PROMETHEUS_EXTERNAL_URL - внешний url для Prometheus
 * ALERT_MANAGER_EXTERNAL_URL - внешний url для Alert manager
+* MAIL_FROM_ACCOUNT - email почтового ящика
+* MAIL_AUTH_TOKEN - токен доступа для почтового ящика
+* MAIL_RECEIVER_ACCOUNT - email для приема входящих сообщений от alert manager
+* ECA_SERVER_JDBC_URL - jdbc url для базы eca-server
+* ECA_OAUTH_JDBC_URL - jdbc url для базы eca-oauth
+* NS_JDBC_URL - jdbc url для базы notification-service
+* ERS_JDBC_URL - - jdbc url для базы evaluation-results-service
 
 Инструкция по развертыванию
 ----------------------------------------
