@@ -36,7 +36,10 @@
 * ECA_SERVER_JDBC_URL - jdbc url для базы eca-server
 * ECA_OAUTH_JDBC_URL - jdbc url для базы eca-oauth
 * NS_JDBC_URL - jdbc url для базы notification-service
-* ERS_JDBC_URL - - jdbc url для базы evaluation-results-service
+* ERS_JDBC_URL - jdbc url для базы evaluation-results-service
+* RABBITMQ_HOST - Rabbit MQ хост для eca-server
+* EXPERIMENT_MAIL_URL - url notification - service для eca - server
+* ERS_URL - url ERS для eca - server
 
 Инструкция по развертыванию
 ----------------------------------------
