@@ -1,6 +1,6 @@
 global:
   smtp_smarthost: 'smtp.gmail.com:25'
-  smtp_from: '$MAIL_ACCOUNT'
+  smtp_from: '$MAIL_FROM_ACCOUNT'
   smtp_auth_username: '$MAIL_ACCOUNT'
   smtp_auth_password: '$MAIL_AUTH_TOKEN'
 
