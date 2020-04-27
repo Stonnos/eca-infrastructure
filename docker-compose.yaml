@@ -31,11 +31,11 @@ services:
   eca-server:
     image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:eca-server
     container_name: eca-server
-    command: ["/wait-for-it.sh", "${POSTGRES_URI}", "--timeout=${DB_CONTAINER_WAIT_TIMEOUT}", "--", "catalina.sh", "run"]
     volumes:
       - experiment-data:/home/experiment
     environment:
       TZ: ${TIME_ZONE}
+      DB_CONTAINER_WAIT_TIMEOUT: ${DB_CONTAINER_WAIT_TIMEOUT}
       SPRING_PROFILES_ACTIVE: "docker-prod"
       SPRING_DATASOURCE_URL: ${ECA_SERVER_JDBC_URL}
       SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
@@ -55,9 +55,9 @@ services:
   eca-oauth:
     image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:eca-oauth
     container_name: eca-oauth
-    command: ["/wait-for-it.sh", "${POSTGRES_URI}", "--timeout=${DB_CONTAINER_WAIT_TIMEOUT}", "--", "catalina.sh", "run"]
     environment:
       TZ: ${TIME_ZONE}
+      DB_CONTAINER_WAIT_TIMEOUT: ${DB_CONTAINER_WAIT_TIMEOUT}
       SPRING_PROFILES_ACTIVE: "docker-prod"
       SPRING_DATASOURCE_URL: ${ECA_OAUTH_JDBC_URL}
       SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
@@ -96,9 +96,9 @@ services:
   notification-service:
     image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:notification-service
     container_name: notification-service
-    command: ["/wait-for-it.sh", "${POSTGRES_URI}", "--timeout=${DB_CONTAINER_WAIT_TIMEOUT}", "--", "java", "-jar", "notification-service.war"]
     environment:
       TZ: ${TIME_ZONE}
+      DB_CONTAINER_WAIT_TIMEOUT: ${DB_CONTAINER_WAIT_TIMEOUT}
       SPRING_PROFILES_ACTIVE: "docker-prod"
       SPRING_DATASOURCE_URL: ${NS_JDBC_URL}
       SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
@@ -115,9 +115,9 @@ services:
   evaluation-results-service:
     image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:evaluation-results-service
     container_name: evaluation-results-service
-    command: ["/wait-for-it.sh", "${POSTGRES_URI}", "--timeout=${DB_CONTAINER_WAIT_TIMEOUT}", "--", "java", "-jar", "evaluation-results-service.war"]
     environment:
       TZ: ${TIME_ZONE}
+      DB_CONTAINER_WAIT_TIMEOUT: ${DB_CONTAINER_WAIT_TIMEOUT}
       SPRING_PROFILES_ACTIVE: "docker-prod"
       SPRING_DATASOURCE_URL: ${ERS_JDBC_URL}
       SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
