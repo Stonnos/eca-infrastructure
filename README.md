@@ -16,9 +16,9 @@
 * TIME_ZONE - тайм зона для контейнера
 * DOCKER_REPOSITORY - docker репозиторий в docker hub
 * DOCKER_USERNAME - docker логин
-* POSTGRES_URI - URI PostgreSQL БД
 * POSTGRES_USER - логин пользователя PostgreSQL БД
 * POSTGRES_PASSWORD - пароль пользователя PostgreSQL БД
+* DB_CONTAINER_WAIT - URI PostgreSQL БД (переменная для скрипта wait-fot-it.sh)
 * DB_CONTAINER_WAIT_TIMEOUT - таймаут ожидания старта контейнера в сек. (переменная для скрипта wait-fot-it.sh)
 * PG_EXPORTER_DATASOURCE_URI - URI БД для postgres exporter
 * GRAFANA_LOGIN - логин пользователя Grafana
@@ -30,16 +30,11 @@
 * GRAFANA_VERSION - версия Grafana
 * PROMETHEUS_EXTERNAL_URL - внешний url для Prometheus
 * ALERT_MANAGER_EXTERNAL_URL - внешний url для Alert manager
-* MAIL_FROM_ACCOUNT - email почтового ящика
-* MAIL_AUTH_TOKEN - токен доступа для почтового ящика
-* MAIL_RECEIVER_ACCOUNT - email для приема входящих сообщений от alert manager
 * ECA_SERVER_JDBC_URL - jdbc url для базы eca-server
 * ECA_OAUTH_JDBC_URL - jdbc url для базы eca-oauth
 * NS_JDBC_URL - jdbc url для базы notification-service
 * ERS_JDBC_URL - jdbc url для базы evaluation-results-service
 * RABBITMQ_HOST - Rabbit MQ хост для eca-server
-* EXPERIMENT_MAIL_URL - url notification - service для eca - server
-* ERS_URL - url ERS для eca - server
 
 Инструкция по развертыванию
 ----------------------------------------
