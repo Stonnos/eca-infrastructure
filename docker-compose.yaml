@@ -28,6 +28,18 @@ services:
     environment:
       TZ: ${TIME_ZONE}
 
+  discovery-server:
+    image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:discovery-server
+    container_name: discovery-server
+    ports:
+      - "8761:8761"
+    environment:
+      TZ: ${TIME_ZONE}
+      SPRING_PROFILES_ACTIVE: "docker-prod"
+    labels:
+      collect_logs_with_filebeat: "true"
+      decode_log_event_to_json_object: "true"
+
   eca-server:
     image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:eca-server
     container_name: eca-server
@@ -35,6 +47,7 @@ services:
       - experiment-data:/home/experiment
     environment:
       TZ: ${TIME_ZONE}
+      DB_CONTAINER_WAIT: ${DB_CONTAINER_WAIT}
       DB_CONTAINER_WAIT_TIMEOUT: ${DB_CONTAINER_WAIT_TIMEOUT}
       JAVA_OPTS: "-Xmx2g"
       SPRING_PROFILES_ACTIVE: "docker-prod"
@@ -48,6 +61,7 @@ services:
     depends_on:
       - postgres-db
       - rabbitmq
+      - discovery-server
     labels:
       collect_logs_with_filebeat: "true"
       decode_log_event_to_json_object: "true"
@@ -57,6 +71,7 @@ services:
     container_name: eca-oauth
     environment:
       TZ: ${TIME_ZONE}
+      DB_CONTAINER_WAIT: ${DB_CONTAINER_WAIT}
       DB_CONTAINER_WAIT_TIMEOUT: ${DB_CONTAINER_WAIT_TIMEOUT}
       SPRING_PROFILES_ACTIVE: "docker-prod"
       SPRING_DATASOURCE_URL: ${ECA_OAUTH_JDBC_URL}
@@ -65,6 +80,7 @@ services:
       SPRING_JPA_HIBERNATE_DDLAUTO: "validate"
     depends_on:
       - postgres-db
+      - discovery-server
     labels:
       collect_logs_with_filebeat: "true"
       decode_log_event_to_json_object: "true"
@@ -77,6 +93,7 @@ services:
       SPRING_PROFILES_ACTIVE: "docker-prod"
     depends_on:
       - eca-server
+      - discovery-server
     labels:
       collect_logs_with_filebeat: "true"
       decode_log_event_to_json_object: "true"
@@ -89,25 +106,27 @@ services:
       SPRING_PROFILES_ACTIVE: "docker-prod"
     ports:
       - "8080:8080"
+    depends_on:
+      - discovery-server
     labels:
       collect_logs_with_filebeat: "true"
       decode_log_event_to_json_object: "true"
 
-  notification-service:
-    image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:notification-service
-    container_name: notification-service
+  eca-mail:
+    image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:eca-mail
+    container_name: eca-mail
     environment:
       TZ: ${TIME_ZONE}
+      DB_CONTAINER_WAIT: ${DB_CONTAINER_WAIT}
       DB_CONTAINER_WAIT_TIMEOUT: ${DB_CONTAINER_WAIT_TIMEOUT}
       SPRING_PROFILES_ACTIVE: "docker-prod"
       SPRING_DATASOURCE_URL: ${NS_JDBC_URL}
       SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
       SPRING_DATASOURCE_PASSWORD:  ${POSTGRES_PASSWORD}
       SPRING_JPA_HIBERNATE_DDLAUTO: "validate"
-    ports:
-      - "8443:8443"
     depends_on:
       - postgres-db
+      - discovery-server
     labels:
       collect_logs_with_filebeat: "true"
       decode_log_event_to_json_object: "true"
@@ -117,6 +136,7 @@ services:
     container_name: evaluation-results-service
     environment:
       TZ: ${TIME_ZONE}
+      DB_CONTAINER_WAIT: ${DB_CONTAINER_WAIT}
       DB_CONTAINER_WAIT_TIMEOUT: ${DB_CONTAINER_WAIT_TIMEOUT}
       SPRING_PROFILES_ACTIVE: "docker-prod"
       SPRING_DATASOURCE_URL: ${ERS_JDBC_URL}
