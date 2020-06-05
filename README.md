@@ -34,7 +34,9 @@
 * ECA_OAUTH_JDBC_URL - jdbc url для базы eca-oauth
 * NS_JDBC_URL - jdbc url для базы notification-service
 * ERS_JDBC_URL - jdbc url для базы evaluation-results-service
-* RABBITMQ_HOST - Rabbit MQ хост для eca-server
+* RESET_PASSWORD_EXTERNAL_URL - внешний url для восстановления пароля
+* OAUTH2_TOKEN_EXTERNAL_URL - внешний url сервера авторизации
+* EXPERIMENT_DOWNLOAD_EXTERNAL_URL - внешний url для формирования ссылки для скачивания эксперимента
 
 Инструкция по развертыванию
 ----------------------------------------
