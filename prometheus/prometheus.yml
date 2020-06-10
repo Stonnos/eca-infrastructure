@@ -33,6 +33,10 @@ scrape_configs:
     metrics_path: '/actuator/prometheus'
     static_configs:
       - targets: ['discovery-server:8761']
+  - job_name: 'zuul-gate'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['zuul-gate:8030']
   - job_name: 'evaluation-results-service'
     metrics_path: '/actuator/prometheus'
     scheme: https
