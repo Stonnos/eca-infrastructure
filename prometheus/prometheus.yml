@@ -25,6 +25,10 @@ scrape_configs:
     metrics_path: '/actuator/prometheus'
     static_configs:
       - targets: ['eca-mail:8080']
+  - job_name: 'eca-data-storage'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['eca-data-storage:8080']
   - job_name: 'eca-web'
     metrics_path: '/actuator/prometheus'
     static_configs:
