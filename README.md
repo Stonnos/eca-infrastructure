@@ -32,6 +32,7 @@
 * ALERT_MANAGER_EXTERNAL_URL - внешний url для Alert manager
 * ECA_SERVER_JDBC_URL - jdbc url для базы eca-server
 * ECA_OAUTH_JDBC_URL - jdbc url для базы eca-oauth
+* ECA_DS_JDBC_URL - jdbc url для базы eca-data-storage
 * NS_JDBC_URL - jdbc url для базы notification-service
 * ERS_JDBC_URL - jdbc url для базы evaluation-results-service
 * RESET_PASSWORD_EXTERNAL_URL - внешний url для восстановления пароля
