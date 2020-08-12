@@ -33,7 +33,7 @@
 * ECA_SERVER_JDBC_URL - jdbc url для базы eca-server
 * ECA_OAUTH_JDBC_URL - jdbc url для базы eca-oauth
 * ECA_DS_JDBC_URL - jdbc url для базы eca-data-storage
-* NS_JDBC_URL - jdbc url для базы notification-service
+* NS_JDBC_URL - jdbc url для базы eca-mail
 * ERS_JDBC_URL - jdbc url для базы evaluation-results-service
 * RESET_PASSWORD_EXTERNAL_URL - внешний url для восстановления пароля
 * OAUTH2_TOKEN_EXTERNAL_URL - внешний url сервера авторизации
