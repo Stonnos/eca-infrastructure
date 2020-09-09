@@ -53,6 +53,7 @@ services:
     container_name: "rabbitmq"
     ports:
       - "15672:15672"
+      - "15692:15692"
       - "5672:5672"
     volumes:
       - ./rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.config
