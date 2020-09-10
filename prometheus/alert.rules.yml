@@ -3,17 +3,33 @@ groups:
     rules:
       - alert: ServiceDown
         expr: up == 0
-        for: 5m
+        for: 2m
         labels:
-          severity: page
+          severity: critical
         annotations:
           summary: 'Service {{ $labels.instance }} is unavailable.'
-          description: '{{ $labels.instance }} has been down for more than 5 minutes.'
+          description: '{{ $labels.instance }} has been down for more than 2 minutes.'
       - alert: PostgreSQLDown
         expr: pg_up != 1
-        for: 5m
+        for: 2m
         labels:
-          severity: email
+          severity: critical
         annotations:
           summary: 'PostgreSQL {{ $labels.instance }} is unavailable.'
-          description: '{{ $labels.instance }} has been down for more than 5 minutes.'
+          description: '{{ $labels.instance }} has been down for more than 2 minutes.'
+      - alert: HeapUsageTooMuch
+        expr: sum(jvm_memory_used_bytes{area="heap"}) by (instance) / sum(jvm_memory_max_bytes{area="heap"}) by (instance) * 100 > 75
+        for: 30s
+        labels:
+          severity: warning
+        annotations:
+          summary: "JVM Instance {{ $labels.instance }} memory usage > 75%"
+          description: "{{ $labels.instance }} has been in status [heap usage > 75%] for more than 30 sec. current usage ({{ $value }}%)"
+      - alert: ProcessCpuUsageTooMuch
+        expr: process_cpu_usage * 100 > 75
+        for: 30s
+        labels:
+          severity: warning
+        annotations:
+          summary: "JVM Instance {{ $labels.instance }} cpu usage > 75%"
+          description: "{{ $labels.instance }} has been in status [cpu usage > 75%] for more than 30 sec. CPU current usage ({{ $value }}%)"
