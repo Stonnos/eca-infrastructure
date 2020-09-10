@@ -24,7 +24,7 @@ groups:
           severity: warning
         annotations:
           summary: "JVM Instance {{ $labels.instance }} memory usage > 75%"
-          description: "{{ $labels.instance }} has been in status [heap usage > 75%] for more than 30 sec. current usage ({{ $value }}%)"
+          description: "{{ $labels.instance }} has been in status [heap usage > 75%] for more than 30 sec. current usage ({{ humanize $value }}%)"
       - alert: ProcessCpuUsageTooMuch
         expr: process_cpu_usage * 100 > 75
         for: 30s
@@ -32,4 +32,4 @@ groups:
           severity: warning
         annotations:
           summary: "JVM Instance {{ $labels.instance }} cpu usage > 75%"
-          description: "{{ $labels.instance }} has been in status [cpu usage > 75%] for more than 30 sec. CPU current usage ({{ $value }}%)"
+          description: "{{ $labels.instance }} has been in status [cpu usage > 75%] for more than 30 sec. CPU current usage ({{ humanize $value }}%)"
