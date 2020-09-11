@@ -18,18 +18,34 @@ groups:
           summary: 'PostgreSQL {{ $labels.instance }} is unavailable.'
           description: '{{ $labels.instance }} has been down for more than 2 minutes.'
       - alert: HeapUsageTooMuch
-        expr: sum(jvm_memory_used_bytes{area="heap"}) by (instance) / sum(jvm_memory_max_bytes{area="heap"}) by (instance) * 100 > 75
-        for: 30s
+        expr: sum(jvm_memory_used_bytes{area="heap"}) by (instance) / sum(jvm_memory_max_bytes{area="heap"}) by (instance) * 100 > 70
+        for: 1m
         labels:
           severity: warning
         annotations:
-          summary: "JVM Instance {{ $labels.instance }} memory usage > 75%"
-          description: "{{ $labels.instance }} has been in status [heap usage > 75%] for more than 30 sec. current usage ({{ humanize $value }}%)"
+          summary: "JVM Instance {{ $labels.instance }} memory usage > 70%"
+          description: "{{ $labels.instance }} has been in status [heap usage > 70%] for more than 1 minute. Current usage ({{ humanize $value }}%)"
+      - alert: HeapUsageTooMuch
+        expr: sum(jvm_memory_used_bytes{area="heap"}) by (instance) / sum(jvm_memory_max_bytes{area="heap"}) by (instance) * 100 > 80
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "JVM Instance {{ $labels.instance }} memory usage > 80%"
+          description: "{{ $labels.instance }} has been in status [heap usage > 80%] for more than 1 minute. Current usage ({{ humanize $value }}%)"
       - alert: ProcessCpuUsageTooMuch
-        expr: process_cpu_usage * 100 > 75
-        for: 30s
+        expr: process_cpu_usage * 100 > 70
+        for: 1m
         labels:
           severity: warning
         annotations:
-          summary: "JVM Instance {{ $labels.instance }} cpu usage > 75%"
-          description: "{{ $labels.instance }} has been in status [cpu usage > 75%] for more than 30 sec. CPU current usage ({{ humanize $value }}%)"
+          summary: "JVM Instance {{ $labels.instance }} cpu usage > 70%"
+          description: "{{ $labels.instance }} has been in status [cpu usage > 70%] for more than 1 minute. CPU current usage ({{ humanize $value }}%)"
+      - alert: ProcessCpuUsageTooMuch
+        expr: process_cpu_usage * 100 > 80
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "JVM Instance {{ $labels.instance }} cpu usage > 80%"
+          description: "{{ $labels.instance }} has been in status [cpu usage > 80%] for more than 30 sec. CPU current usage ({{ humanize $value }}%)"
