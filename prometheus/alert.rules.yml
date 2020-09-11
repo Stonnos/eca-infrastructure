@@ -49,3 +49,11 @@ groups:
         annotations:
           summary: "JVM Instance {{ $labels.instance }} cpu usage > 80%"
           description: "{{ $labels.instance }} has been in status [cpu usage > 80%] for more than 1 minute. CPU current usage ({{ humanize $value }}%)"
+      - alert: RabbitMQUnackedMessagesTooMuch
+        expr: sum(rabbitmq_queue_messages_unacked) by (instance, rabbitmq_cluster) > 100
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Rabbit MQ instance {{ $labels.instance }} unacked messages > 100"
+          description: "{{ $labels.instance }} has been in status [unacked messages > 100] for more than 1 minute. Current unacked messages ({{ humanize $value }})"
