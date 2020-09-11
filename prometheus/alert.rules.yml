@@ -48,4 +48,4 @@ groups:
           severity: critical
         annotations:
           summary: "JVM Instance {{ $labels.instance }} cpu usage > 80%"
-          description: "{{ $labels.instance }} has been in status [cpu usage > 80%] for more than 30 sec. CPU current usage ({{ humanize $value }}%)"
+          description: "{{ $labels.instance }} has been in status [cpu usage > 80%] for more than 1 minute. CPU current usage ({{ humanize $value }}%)"
