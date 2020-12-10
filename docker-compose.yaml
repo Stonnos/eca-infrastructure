@@ -13,6 +13,8 @@ x-eca-server-variables: &eca-server-env-variables
   SPRING_TOKENDATASOURCE_USERNAME: ${POSTGRES_USER}
   SPRING_TOKENDATASOURCE_PASSWORD:  ${POSTGRES_PASSWORD}
   SPRING_JPA_HIBERNATE_DDLAUTO: "validate"
+  SPRING_REDIS_HOST: "redis"
+  SPRING_CACHE_TYPE: "redis"
   EXPERIMENT_DOWNLOADBASEURL: ${EXPERIMENT_DOWNLOAD_EXTERNAL_URL}
   SWAGGER2_TOKENBASEURL: ${OAUTH2_TOKEN_EXTERNAL_URL}
 
@@ -188,6 +190,14 @@ services:
     depends_on:
       - postgres-db
     <<: *collect-logs-with-filebeat
+
+  redis:
+    image: redis:${REDIS_VERSION}
+    container_name: redis
+    environment:
+      TZ: ${TIME_ZONE}
+    ports:
+      - "6379:6379"
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:${ES_VERSION}
