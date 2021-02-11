@@ -41,6 +41,9 @@
 * QUEUE_EVALUATION_REQUEST_QUEUE - название входящей очереди для запросов на построение модели классификатора
 * QUEUE_EVALUATION_OPTIMIZER_REQUEST_QUEUE - название входящей очереди для запросов на построение модели классификатора с оптимальными параметрами
 * QUEUE_EXPERIMENT_REQUEST_QUEUE - название входящей очереди для запросов на построение эксперимента
+* TELEGRAM_TOKEN - токен для доступа к Telegram API
+* TELEGRAM_BOTUSERNAME - имя Telegram бота
+* TELEGRAM_CHATID - ID чата в Telegram
 
 Инструкция по развертыванию
 ----------------------------------------

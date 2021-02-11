@@ -14,3 +14,5 @@ receivers:
   - name: 'eca-admin'
     email_configs:
       - to: 'roman.batygin@mail.ru'
+    webhook_configs:
+      - url: 'http://alertmanager-adapter:8080/alerts/telegram'

@@ -267,6 +267,17 @@ services:
       - "--config.file=/etc/alertmanager/alertmanager.yml"
       - "--web.external-url=${ALERT_MANAGER_EXTERNAL_URL}"
 
+  alertmanager-adapter:
+    image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:alertmanager-adapter
+    container_name: alertmanager-adapter
+    environment:
+      SERVER_PORT: "8080"
+      TELEGRAM_TOKEN: ${TELEGRAM_TOKEN}
+      TELEGRAM_BOTUSERNAME: ${TELEGRAM_BOTUSERNAME}
+      TELEGRAM_CHATID: ${TELEGRAM_CHATID}
+    ports:
+      - "8080:8080"
+
   postgres-exporter:
     image: wrouesnel/postgres_exporter
     container_name: postgres-exporter
