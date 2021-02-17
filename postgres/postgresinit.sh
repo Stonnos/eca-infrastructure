@@ -15,3 +15,4 @@ pg_restore -U $POSTGRES_USER -d $ECA_DB_NAME $BACKUPS_FOLDER/eca-db.backup
 pg_restore -U $POSTGRES_USER -d $ECA_OAUTH_DB_NAME $BACKUPS_FOLDER/eca-oauth.backup
 pg_restore -U $POSTGRES_USER -d $ERS_DB_NAME $BACKUPS_FOLDER/ers-db.backup
 pg_restore -U $POSTGRES_USER -d $MAIL_DB_NAME $BACKUPS_FOLDER/ndb.backup
+pg_restore -U $POSTGRES_USER -d $ECA_DS_DB_NAME $BACKUPS_FOLDER/data-storage.backup
