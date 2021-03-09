@@ -35,7 +35,7 @@
 * ECA_DS_JDBC_URL - jdbc url для базы eca-data-storage
 * NS_JDBC_URL - jdbc url для базы eca-mail
 * ERS_JDBC_URL - jdbc url для базы evaluation-results-service
-* RESET_PASSWORD_EXTERNAL_URL - внешний url для восстановления пароля
+* ECA_WEB_EXTERNAL_URL - внешний url web - приложения
 * OAUTH2_TOKEN_EXTERNAL_URL - внешний url сервера авторизации
 * EXPERIMENT_DOWNLOAD_EXTERNAL_URL - внешний url для формирования ссылки для скачивания эксперимента
 * QUEUE_EVALUATION_REQUEST_QUEUE - название входящей очереди для запросов на построение модели классификатора
