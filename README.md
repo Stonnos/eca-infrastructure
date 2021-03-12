@@ -37,6 +37,7 @@
 * ERS_JDBC_URL - jdbc url для базы evaluation-results-service
 * ECA_WEB_EXTERNAL_URL - внешний url web - приложения
 * OAUTH2_TOKEN_EXTERNAL_URL - внешний url сервера авторизации
+* ECA_OAUTH_URL - базовый url модуля eca-oauth
 * EXPERIMENT_DOWNLOAD_EXTERNAL_URL - внешний url для формирования ссылки для скачивания эксперимента
 * QUEUE_EVALUATION_REQUEST_QUEUE - название входящей очереди для запросов на построение модели классификатора
 * QUEUE_EVALUATION_OPTIMIZER_REQUEST_QUEUE - название входящей очереди для запросов на построение модели классификатора с оптимальными параметрами
