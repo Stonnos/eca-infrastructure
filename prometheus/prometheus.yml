@@ -25,6 +25,10 @@ scrape_configs:
     metrics_path: '/actuator/prometheus'
     static_configs:
       - targets: ['eca-server-instance-1:8080', 'eca-server-instance-2:8080']
+  - job_name: 'eca-ers'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['eca-ers:8080']
   - job_name: 'eca-mail'
     metrics_path: '/actuator/prometheus'
     static_configs:
@@ -45,10 +49,3 @@ scrape_configs:
     metrics_path: '/actuator/prometheus'
     static_configs:
       - targets: ['zuul-gate:8030']
-  - job_name: 'evaluation-results-service'
-    metrics_path: '/actuator/prometheus'
-    scheme: https
-    tls_config:
-       insecure_skip_verify: true
-    static_configs:
-      - targets: ['evaluation-results-service:9443']

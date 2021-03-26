@@ -172,9 +172,9 @@ services:
       - discovery-server
     <<: *collect-logs-with-filebeat
 
-  evaluation-results-service:
-    image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:evaluation-results-service
-    container_name: evaluation-results-service
+  eca-ers:
+    image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:eca-ers
+    container_name: eca-ers
     environment:
       TZ: ${TIME_ZONE}
       DB_CONTAINER_WAIT: ${DB_CONTAINER_WAIT}
@@ -185,8 +185,6 @@ services:
       SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
       SPRING_DATASOURCE_PASSWORD:  ${POSTGRES_PASSWORD}
       SPRING_JPA_HIBERNATE_DDLAUTO: "validate"
-    ports:
-      - "9443:9443"
     depends_on:
       - postgres-db
     <<: *collect-logs-with-filebeat
