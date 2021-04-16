@@ -28,6 +28,8 @@
 * PROMETHEUS_VERSION - версия Prometheus
 * ALERTMANAGER_VERSION - версия Alert manager
 * GRAFANA_VERSION - версия Grafana
+* RABBIT_MQ_VERSION - версия RabbitMQ
+* POSTGRES_EXPORTER_VERSION - версия утилиты postgres-exporter для преобразования метрик в формат prometheus
 * PROMETHEUS_EXTERNAL_URL - внешний url для Prometheus
 * ALERT_MANAGER_EXTERNAL_URL - внешний url для Alert manager
 * ECA_SERVER_JDBC_URL - jdbc url для базы eca-server

@@ -52,7 +52,7 @@ services:
       PGTZ: ${TIME_ZONE}
 
   rabbitmq:
-    image: "rabbitmq:3-management"
+    image: rabbitmq:${RABBIT_MQ_VERSION}
     container_name: "rabbitmq"
     ports:
       - "15672:15672"
@@ -275,7 +275,7 @@ services:
       - "8090:8080"
 
   postgres-exporter:
-    image: wrouesnel/postgres_exporter
+    image: wrouesnel/postgres_exporter:${POSTGRES_EXPORTER_VERSION}
     container_name: postgres-exporter
     ports:
       - "9187:9187"
