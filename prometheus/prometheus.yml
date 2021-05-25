@@ -49,3 +49,7 @@ scrape_configs:
     metrics_path: '/actuator/prometheus'
     static_configs:
       - targets: ['zuul-gate:8030']
+  - job_name: 'eca-web-push'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['eca-web-push:8099']
