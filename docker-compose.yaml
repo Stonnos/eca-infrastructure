@@ -189,6 +189,18 @@ services:
       - postgres-db
     <<: *collect-logs-with-filebeat
 
+  eca-web-push:
+    image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:eca-web-push
+    container_name: eca-web-push
+    ports:
+      - "8099:8099"
+    environment:
+      TZ: ${TIME_ZONE}
+      SERVER_PORT: "8099"
+      SPRING_PROFILES_ACTIVE: "docker-prod"
+      JAVA_OPTS: "-Xmx512m"
+    <<: *collect-logs-with-filebeat
+
   redis:
     image: redis:${REDIS_VERSION}
     container_name: redis
