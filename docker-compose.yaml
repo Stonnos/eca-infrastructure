@@ -18,6 +18,7 @@ x-eca-server-variables: &eca-server-env-variables
   EXPERIMENT_DOWNLOADBASEURL: ${EXPERIMENT_DOWNLOAD_EXTERNAL_URL}
   SWAGGER2_TOKENBASEURL: ${OAUTH2_TOKEN_EXTERNAL_URL}
   AUTHSERVER_BASEURL: ${ECA_OAUTH_URL}
+  AUDIT_ENABLED: "true"
 
 x-collect-logs-with-filebeat: &collect-logs-with-filebeat
   labels:
@@ -105,6 +106,7 @@ services:
       RESETPASSWORD_BASEURL: ${ECA_WEB_EXTERNAL_URL}
       CHANGEPASSWORD_BASEURL: ${ECA_WEB_EXTERNAL_URL}
       SWAGGER2_TOKENBASEURL: ${OAUTH2_TOKEN_EXTERNAL_URL}
+      AUDIT_ENABLED: "true"
     depends_on:
       - postgres-db
       - discovery-server
@@ -167,6 +169,7 @@ services:
       SPRING_JPA_HIBERNATE_DDLAUTO: "validate"
       SWAGGER2_TOKENBASEURL: ${OAUTH2_TOKEN_EXTERNAL_URL}
       AUTHSERVER_BASEURL: ${ECA_OAUTH_URL}
+      AUDIT_ENABLED: "true"
     depends_on:
       - postgres-db
       - discovery-server
@@ -199,6 +202,26 @@ services:
       SERVER_PORT: "8099"
       SPRING_PROFILES_ACTIVE: "docker-prod"
       JAVA_OPTS: "-Xmx512m"
+    <<: *collect-logs-with-filebeat
+
+  eca-audit-log:
+    image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:eca-audit-log
+    container_name: eca-audit-log
+    environment:
+      TZ: ${TIME_ZONE}
+      DB_CONTAINER_WAIT: ${DB_CONTAINER_WAIT}
+      DB_CONTAINER_WAIT_TIMEOUT: ${DB_CONTAINER_WAIT_TIMEOUT}
+      JAVA_OPTS: "-Xmx512m"
+      SPRING_PROFILES_ACTIVE: "docker-prod"
+      SPRING_DATASOURCE_URL: ${ECA_AUDIT_LOG_JDBC_URL}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
+      SPRING_DATASOURCE_PASSWORD:  ${POSTGRES_PASSWORD}
+      SPRING_JPA_HIBERNATE_DDLAUTO: "validate"
+      SWAGGER2_TOKENBASEURL: ${OAUTH2_TOKEN_EXTERNAL_URL}
+      AUTHSERVER_BASEURL: ${ECA_OAUTH_URL}
+    depends_on:
+      - postgres-db
+      - discovery-server
     <<: *collect-logs-with-filebeat
 
   redis:
