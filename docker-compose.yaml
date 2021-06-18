@@ -201,6 +201,7 @@ services:
       TZ: ${TIME_ZONE}
       SERVER_PORT: "8099"
       SPRING_PROFILES_ACTIVE: "docker-prod"
+      AUTHSERVER_BASEURL: ${ECA_OAUTH_URL}
       JAVA_OPTS: "-Xmx512m"
     <<: *collect-logs-with-filebeat
 
