@@ -53,3 +53,7 @@ scrape_configs:
     metrics_path: '/actuator/prometheus'
     static_configs:
       - targets: ['eca-web-push:8099']
+  - job_name: 'eca-audit-log'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['eca-audit-log:8080']

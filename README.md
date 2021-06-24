@@ -35,6 +35,7 @@
 * ECA_SERVER_JDBC_URL - jdbc url для базы eca-server
 * ECA_OAUTH_JDBC_URL - jdbc url для базы eca-oauth
 * ECA_DS_JDBC_URL - jdbc url для базы eca-data-storage
+* ECA_AUDIT_LOG_JDBC_URL - jdbc url для базы eca-audit-log
 * NS_JDBC_URL - jdbc url для базы eca-mail
 * ERS_JDBC_URL - jdbc url для базы evaluation-results-service
 * ECA_WEB_EXTERNAL_URL - внешний url web - приложения
