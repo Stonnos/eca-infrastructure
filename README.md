@@ -48,6 +48,8 @@
 * TELEGRAM_TOKEN - токен для доступа к Telegram API
 * TELEGRAM_BOTUSERNAME - имя Telegram бота
 * TELEGRAM_CHATID - ID чата в Telegram
+* AUDIT_ASYNC_EVENTS - вкл./выкл. асинхронной отправки событий аудита
+* AUDIT_THREAD_POOL_SIZE - размер пула потоков для асинхронной отправки событий аудита
 
 Инструкция по развертыванию
 ----------------------------------------
