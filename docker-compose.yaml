@@ -156,6 +156,8 @@ services:
       SPRING_DATASOURCE_PASSWORD:  ${POSTGRES_PASSWORD}
       SPRING_JPA_HIBERNATE_DDLAUTO: "validate"
       OPENAPI_BASEURL: "/eca-mail"
+      OPENAPI_TOKENBASEURL: ${OAUTH2_TOKEN_EXTERNAL_URL}
+      AUTHSERVER_BASEURL: ${ECA_OAUTH_URL}
     depends_on:
       - postgres-db
       - discovery-server
