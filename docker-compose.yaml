@@ -17,7 +17,7 @@ x-eca-server-variables: &eca-server-env-variables
   SPRING_CACHE_TYPE: "redis"
   EXPERIMENT_DOWNLOADBASEURL: ${EXPERIMENT_DOWNLOAD_EXTERNAL_URL}
   OPENAPI_TOKENBASEURL: ${OAUTH2_TOKEN_EXTERNAL_URL}
-  OPENAPI_BASEURL: "/eca-server"
+  OPENAPI_BASEPATH: "/eca-server"
   AUTHSERVER_BASEURL: ${ECA_OAUTH_URL}
   AUDIT_ENABLED: "true"
   AUDIT_REDELIVERY: "true"
@@ -108,7 +108,7 @@ services:
       SPRING_JPA_HIBERNATE_DDLAUTO: "validate"
       APP_WEBEXTERNALBASEURL: ${ECA_WEB_EXTERNAL_URL}
       OPENAPI_TOKENBASEURL: ${OAUTH2_TOKEN_EXTERNAL_URL}
-      OPENAPI_BASEURL: "/eca-oauth"
+      OPENAPI_BASEPATH: "/eca-oauth"
       AUDIT_ENABLED: "true"
       AUDIT_REDELIVERY: "true"
       AUDIT_ASYNCEVENTS: ${AUDIT_ASYNC_EVENTS}
@@ -155,7 +155,7 @@ services:
       SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
       SPRING_DATASOURCE_PASSWORD:  ${POSTGRES_PASSWORD}
       SPRING_JPA_HIBERNATE_DDLAUTO: "validate"
-      OPENAPI_BASEURL: "/eca-mail"
+      OPENAPI_BASEPATH: "/eca-mail"
       OPENAPI_TOKENBASEURL: ${OAUTH2_TOKEN_EXTERNAL_URL}
       AUTHSERVER_BASEURL: ${ECA_OAUTH_URL}
     depends_on:
@@ -177,7 +177,7 @@ services:
       SPRING_DATASOURCE_PASSWORD:  ${POSTGRES_PASSWORD}
       SPRING_JPA_HIBERNATE_DDLAUTO: "validate"
       OPENAPI_TOKENBASEURL: ${OAUTH2_TOKEN_EXTERNAL_URL}
-      OPENAPI_BASEURL: "/eca-ds"
+      OPENAPI_BASEPATH: "/eca-ds"
       AUTHSERVER_BASEURL: ${ECA_OAUTH_URL}
       AUDIT_ENABLED: "true"
       AUDIT_REDELIVERY: "true"
@@ -201,7 +201,7 @@ services:
       SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
       SPRING_DATASOURCE_PASSWORD:  ${POSTGRES_PASSWORD}
       SPRING_JPA_HIBERNATE_DDLAUTO: "validate"
-      OPENAPI_BASEURL: "/eca-ers"
+      OPENAPI_BASEPATH: "/eca-ers"
     depends_on:
       - postgres-db
     <<: *collect-logs-with-filebeat
@@ -216,7 +216,7 @@ services:
       SERVER_PORT: "8099"
       SPRING_PROFILES_ACTIVE: "docker-prod"
       AUTHSERVER_BASEURL: ${ECA_OAUTH_URL}
-      OPENAPI_BASEURL: "/eca-web-push"
+      OPENAPI_BASEPATH: "/eca-web-push"
       JAVA_OPTS: "-Xmx512m"
     <<: *collect-logs-with-filebeat
 
@@ -234,7 +234,7 @@ services:
       SPRING_DATASOURCE_PASSWORD:  ${POSTGRES_PASSWORD}
       SPRING_JPA_HIBERNATE_DDLAUTO: "validate"
       OPENAPI_TOKENBASEURL: ${OAUTH2_TOKEN_EXTERNAL_URL}
-      OPENAPI_BASEURL: "/eca-audit-log"
+      OPENAPI_BASEPATH: "/eca-audit-log"
       AUTHSERVER_BASEURL: ${ECA_OAUTH_URL}
     depends_on:
       - postgres-db

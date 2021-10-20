@@ -57,3 +57,11 @@ groups:
         annotations:
           summary: "Rabbit MQ instance {{ $labels.instance }} unacked messages > 100"
           description: "{{ $labels.instance }} has been in status [unacked messages > 100] for more than 1 minute. Current unacked messages ({{ humanize $value }})"
+      - alert: SendingEmailMessagesErrorsIncreased
+        expr: sum(eca_mail_sending_message_error_total) by (instance) >= 10
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Sending email messages errors increased"
+          description: "Sending email messages errors increased in the last minute. Current sending email messages errors count ({{ humanize $value }})"
