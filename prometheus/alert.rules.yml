@@ -63,5 +63,29 @@ groups:
         labels:
           severity: critical
         annotations:
-          summary: "Sending email messages errors increased"
-          description: "Sending email messages errors increased in the last minute. Current sending email messages errors count ({{ humanize $value }})"
+          summary: "Sending email messages errors increased in instance {{ $labels.instance }}"
+          description: "Sending email messages errors increased in the last minute. Total errors count ({{ humanize $value }})"
+      - alert: EcaErsRequestErrorsIncreased
+        expr: sum(feign_Client_http_response_code_total{status_group="5xx",host="eca-ers"}) by (instance) >= 10
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Ers request errors increased in instance {{ $labels.instance }}"
+          description: "Ers request errors increased in the last 5 minutes. Total errors count ({{ humanize $value }})"
+      - alert: EcaMailRequestErrorsIncreased
+        expr: sum(feign_Client_http_response_code_total{status_group="5xx",host="eca-mail"}) by (instance) >= 10
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Eca mail request errors increased in instance {{ $labels.instance }}"
+          description: "Eca mail request errors increased in the last 5 minutes. Total errors count ({{ humanize $value }})"
+      - alert: EcaAuditRequestErrorsIncreased
+        expr: sum(feign_Client_http_response_code_total{status_group="5xx",host="eca-audit-log"}) by (instance) >= 10
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Eca audit request errors increased in instance {{ $labels.instance }}"
+          description: "Eca audit request errors increased in the last 5 minutes. Total errors count ({{ humanize $value }})"
