@@ -58,34 +58,34 @@ groups:
           summary: "Rabbit MQ instance {{ $labels.instance }} unacked messages > 100"
           description: "{{ $labels.instance }} has been in status [unacked messages > 100] for more than 1 minute. Current unacked messages ({{ humanize $value }})"
       - alert: SendingEmailMessagesErrorsIncreased
-        expr: sum(eca_mail_sending_message_error_total) by (instance) >= 10
-        for: 1m
+        expr: sum(increase(eca_mail_sending_message_error_total[1m])) by (instance) >= 5
+        for: 0m
         labels:
           severity: critical
         annotations:
           summary: "Sending email messages errors increased in instance {{ $labels.instance }}"
-          description: "Sending email messages errors increased in the last minute. Total errors count ({{ humanize $value }})"
+          description: "Sending email messages errors increased in the last minute. Total errors rate ({{ humanize $value }})"
       - alert: EcaErsRequestErrorsIncreased
-        expr: sum(feign_Client_http_response_code_total{status_group="5xx",host="eca-ers"}) by (instance) >= 10
-        for: 5m
+        expr: sum(increase(feign_Client_http_response_code_total{status_group="5xx",host="eca-ers"}[5m])) by (instance) >= 4
+        for: 0m
         labels:
           severity: warning
         annotations:
           summary: "Ers request errors increased in instance {{ $labels.instance }}"
-          description: "Ers request errors increased in the last 5 minutes. Total errors count ({{ humanize $value }})"
+          description: "Ers request errors increased in the last 5 minutes. Total errors rate ({{ humanize $value }})"
       - alert: EcaMailRequestErrorsIncreased
-        expr: sum(feign_Client_http_response_code_total{status_group="5xx",host="eca-mail"}) by (instance) >= 10
-        for: 5m
+        expr: sum(increase(feign_Client_http_response_code_total{status_group="5xx",host="eca-mail"}[5m])) by (instance) >= 4
+        for: 0m
         labels:
           severity: warning
         annotations:
           summary: "Eca mail request errors increased in instance {{ $labels.instance }}"
-          description: "Eca mail request errors increased in the last 5 minutes. Total errors count ({{ humanize $value }})"
+          description: "Eca mail request errors increased in the last 5 minutes. Total errors rate ({{ humanize $value }})"
       - alert: EcaAuditRequestErrorsIncreased
-        expr: sum(feign_Client_http_response_code_total{status_group="5xx",host="eca-audit-log"}) by (instance) >= 10
-        for: 5m
+        expr: sum(increase(feign_Client_http_response_code_total{status_group="5xx",host="eca-audit-log"}[5m])) by (instance) >= 4
+        for: 0m
         labels:
           severity: warning
         annotations:
           summary: "Eca audit request errors increased in instance {{ $labels.instance }}"
-          description: "Eca audit request errors increased in the last 5 minutes. Total errors count ({{ humanize $value }})"
+          description: "Eca audit request errors increased in the last 5 minutes. Total errors rate ({{ humanize $value }})"
