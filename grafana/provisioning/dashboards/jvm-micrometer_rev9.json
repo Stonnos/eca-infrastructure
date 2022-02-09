@@ -3164,6 +3164,6 @@
     ]
   },
   "timezone": "browser",
-  "title": "Eca monitoring dashboard",
+  "title": "JVM monitoring dashboard",
   "version": 24
 }
