@@ -250,7 +250,7 @@ services:
       - "6379:6379"
 
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:${ES_VERSION}
+    image: elastic/elasticsearch:${ES_VERSION}
     container_name: elasticsearch
     environment:
       - "TZ=${TIME_ZONE}"
@@ -261,7 +261,7 @@ services:
       - elasticsearch-data:/usr/share/elasticsearch/data:rw
 
   kibana:
-    image: docker.elastic.co/kibana/kibana:${ES_VERSION}
+    image: elastic/kibana:${ES_VERSION}
     container_name: kibana
     environment:
       TZ: ${TIME_ZONE}
@@ -271,7 +271,7 @@ services:
       - elasticsearch
 
   filebeat:
-    image: docker.elastic.co/beats/filebeat:${ES_VERSION}
+    image: elastic/filebeat:${ES_VERSION}
     container_name: filebeat
     environment:
       TZ: ${TIME_ZONE}
