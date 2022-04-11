@@ -20,10 +20,9 @@ x-eca-server-variables: &eca-server-env-variables
   OPENAPI_BASEPATH: "/eca-server"
   AUTHSERVER_BASEURL: ${ECA_OAUTH_URL}
   AUDIT_ENABLED: "true"
-  AUDIT_REDELIVERY: "true"
   AUDIT_ASYNCEVENTS: ${AUDIT_ASYNC_EVENTS}
   AUDIT_THREADPOOLSIZE: ${AUDIT_THREAD_POOL_SIZE}
-  ERS_REDELIVERY: "true"
+  REDELIVERY_ENABLED: "true"
   LOCK_ENABLED: "true"
 
 x-collect-logs-with-filebeat: &collect-logs-with-filebeat
@@ -111,7 +110,7 @@ services:
       OPENAPI_TOKENBASEURL: ${OAUTH2_TOKEN_EXTERNAL_URL}
       OPENAPI_BASEPATH: "/eca-oauth"
       AUDIT_ENABLED: "true"
-      AUDIT_REDELIVERY: "true"
+      REDELIVERY_ENABLED: "true"
       AUDIT_ASYNCEVENTS: ${AUDIT_ASYNC_EVENTS}
       AUDIT_THREADPOOLSIZE: ${AUDIT_THREAD_POOL_SIZE}
     depends_on:
@@ -181,7 +180,7 @@ services:
       OPENAPI_BASEPATH: "/eca-ds"
       AUTHSERVER_BASEURL: ${ECA_OAUTH_URL}
       AUDIT_ENABLED: "true"
-      AUDIT_REDELIVERY: "true"
+      REDELIVERY_ENABLED: "true"
       AUDIT_ASYNCEVENTS: ${AUDIT_ASYNC_EVENTS}
       AUDIT_THREADPOOLSIZE: ${AUDIT_THREAD_POOL_SIZE}
     depends_on:
