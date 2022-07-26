@@ -53,6 +53,7 @@
 * AUDIT_ASYNC_EVENTS - вкл./выкл. асинхронной отправки событий аудита
 * AUDIT_THREAD_POOL_SIZE - размер пула потоков для асинхронной отправки событий аудита
 * REDELIVERY_REDELIVERY_INTERVAL_MILLIS - интервал в мс. между запусками шедулера для повторной отправки запросов
+* LOGGING_MODE - режим логирования (text или json)
 * S3_MINIO_URL - url s3 minio
 * MINIO_ROOT_USER - логин для подключения к s3
 * MINIO_ROOT_PASSWORD - пароль для подключения к s3
