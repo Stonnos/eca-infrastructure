@@ -89,3 +89,11 @@ groups:
         annotations:
           summary: "Eca audit request errors increased in instance {{ $labels.instance }}"
           description: "Eca audit request errors increased in the last 5 minutes. Total errors rate ({{ humanize $value }})"
+      - alert: S3RequestErrorsIncreased
+        expr: sum(increase(s3_storage_request_error_total[5m])) by (instance) >= 4
+        for: 0m
+        labels:
+          severity: warning
+        annotations:
+          summary: "S3 request errors increased in instance {{ $labels.instance }}"
+          description: "S3 request errors increased in the last 5 minutes. Total errors rate ({{ humanize $value }})"
