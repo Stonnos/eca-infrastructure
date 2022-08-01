@@ -30,6 +30,8 @@
 * GRAFANA_VERSION - версия Grafana
 * RABBIT_MQ_VERSION - версия RabbitMQ
 * POSTGRES_EXPORTER_VERSION - версия утилиты postgres-exporter для преобразования метрик в формат prometheus
+* MINIO_VERSION - версия s3 minio
+* NGINX_VERSION - версия nginx
 * PROMETHEUS_EXTERNAL_URL - внешний url для Prometheus
 * ALERT_MANAGER_EXTERNAL_URL - внешний url для Alert manager
 * ECA_SERVER_JDBC_URL - jdbc url для базы eca-server
@@ -51,6 +53,11 @@
 * AUDIT_ASYNC_EVENTS - вкл./выкл. асинхронной отправки событий аудита
 * AUDIT_THREAD_POOL_SIZE - размер пула потоков для асинхронной отправки событий аудита
 * REDELIVERY_REDELIVERY_INTERVAL_MILLIS - интервал в мс. между запусками шедулера для повторной отправки запросов
+* LOGGING_MODE - режим логирования (text или json)
+* S3_MINIO_URL - url s3 minio
+* MINIO_ROOT_USER - логин для подключения к s3
+* MINIO_ROOT_PASSWORD - пароль для подключения к s3
+* BUCKET_NAME - имя бакета для хранения моделей в s3
 
 Инструкция по развертыванию
 ----------------------------------------

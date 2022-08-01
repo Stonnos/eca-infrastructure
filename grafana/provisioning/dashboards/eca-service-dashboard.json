@@ -23,7 +23,6 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": null,
-      "decimals": null,
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -31,214 +30,17 @@
         "w": 12,
         "x": 0,
         "y": 0
-      },
-      "hiddenSeries": false,
-      "id": 14,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "hideEmpty": false,
-        "hideZero": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
-      "percentage": false,
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "(sum(rate(feign_Client_http_response_code_total{application=\"eca-server\",host=\"eca-mail\",http_status=\"200\",method=\"sendEmail\"}[1m]) * 60) / 2) >= 0 OR on() vector(0)",
-          "intervalFactor": 2,
-          "legendFormat": "eca-server",
-          "refId": "A"
-        },
-        {
-          "expr": "(sum(rate(feign_Client_http_response_code_total{application=\"eca-oauth\",host=\"eca-mail\",http_status=\"200\",method=\"sendEmail\"}[1m]) * 60) / 2) >= 0 OR on() vector(0)",
-          "intervalFactor": 2,
-          "legendFormat": "eca-oauth",
-          "refId": "B"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Eca mail success requests / min",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "decimals": null,
-          "format": "short",
-          "label": "",
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": null,
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 0
-      },
-      "hiddenSeries": false,
-      "id": 10,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
-      "percentage": false,
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "(sum(rate(feign_Client_http_response_code_total{application=\"eca-server\",host=\"eca-ers\",http_status=\"200\",method=\"save\"}[1m]) * 60) / 2) >= 0 OR on() vector(0)",
-          "intervalFactor": 2,
-          "legendFormat": "/api/save",
-          "refId": "A"
-        },
-        {
-          "expr": "(sum(rate(feign_Client_http_response_code_total{application=\"eca-server\",host=\"eca-ers\",http_status=\"200\",method=\"getEvaluationResults\"}[1m]) * 60) / 2) >= 0 OR on() vector(0)",
-          "intervalFactor": 2,
-          "legendFormat": "/api/results",
-          "refId": "B"
-        },
-        {
-          "expr": "(sum(rate(feign_Client_http_response_code_total{application=\"eca-server\",host=\"eca-ers\",http_status=\"200\",method=\"getClassifierOptions\"}[1m]) * 60) / 2) >= 0 OR on() vector(0)",
-          "intervalFactor": 2,
-          "legendFormat": "/api/optimal-classifier-options",
-          "refId": "C"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Ers success requests / min",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": null,
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 8
       },
       "hiddenSeries": false,
       "id": 12,
       "legend": {
         "avg": false,
-        "current": false,
+        "current": true,
         "max": false,
         "min": false,
         "show": true,
         "total": false,
-        "values": false
+        "values": true
       },
       "lines": true,
       "linewidth": 1,
@@ -294,7 +96,7 @@
       },
       "yaxes": [
         {
-          "format": "short",
+          "format": "opm",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -320,25 +122,28 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": null,
+      "decimals": null,
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 8
+        "y": 0
       },
       "hiddenSeries": false,
-      "id": 4,
+      "id": 18,
       "legend": {
         "avg": false,
-        "current": false,
+        "current": true,
+        "hideEmpty": false,
+        "hideZero": false,
         "max": false,
         "min": false,
         "show": true,
         "total": false,
-        "values": false
+        "values": true
       },
       "lines": true,
       "linewidth": 1,
@@ -356,13 +161,13 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "(sum(rate(feign_Client_http_response_code_total{status_group=\"5xx\",host=\"eca-mail\",application=\"eca-server\"}[1m]) * 60) / 2) >= 0 OR on() vector(0)",
+          "expr": "(sum(rate(feign_Client_http_response_code_total{application=\"eca-server\",host=\"eca-mail\",http_status=\"200\",method=\"sendEmail\"}[1m]) * 60) / 2) >= 0 OR on() vector(0)",
           "intervalFactor": 2,
           "legendFormat": "eca-server",
           "refId": "A"
         },
         {
-          "expr": "(sum(rate(feign_Client_http_response_code_total{status_group=\"5xx\",host=\"eca-mail\",application=\"eca-oauth\"}[1m]) * 60) / 2) >= 0 OR on() vector(0)",
+          "expr": "(sum(rate(feign_Client_http_response_code_total{application=\"eca-oauth\",host=\"eca-mail\",http_status=\"200\",method=\"sendEmail\"}[1m]) * 60) / 2) >= 0 OR on() vector(0)",
           "intervalFactor": 2,
           "legendFormat": "eca-oauth",
           "refId": "B"
@@ -372,7 +177,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Eca mail 5xx errors / min",
+      "title": "Eca mail success requests / min",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -388,7 +193,428 @@
       },
       "yaxes": [
         {
+          "decimals": null,
+          "format": "opm",
+          "label": "",
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
           "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 8
+      },
+      "hiddenSeries": false,
+      "id": 17,
+      "legend": {
+        "avg": false,
+        "current": true,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "(sum(rate(feign_Client_seconds_sum{application=\"eca-server\",host=\"eca-ers\",method=\"save\"}[1m]))/sum(rate(feign_Client_seconds_count{application=\"eca-server\",host=\"eca-ers\",method=\"save\"}[1m]))) >= 0 OR on() vector(0)",
+          "legendFormat": "\"/api/save\" - AVG",
+          "refId": "A"
+        },
+        {
+          "expr": "(max(feign_Client_seconds_max{application=\"eca-server\",host=\"eca-ers\",method=\"save\"})) >= 0 OR on() vector(0)",
+          "legendFormat": "\"/api/save\" - MAX",
+          "refId": "B"
+        },
+        {
+          "expr": "(sum(rate(feign_Client_seconds_sum{application=\"eca-server\",host=\"eca-ers\",method=\"getEvaluationResults\"}[1m]))/sum(rate(feign_Client_seconds_count{application=\"eca-server\",host=\"eca-ers\",method=\"getEvaluationResults\"}[1m]))) >= 0 OR on() vector(0)",
+          "legendFormat": "\"/api/results\" - AVG",
+          "refId": "C"
+        },
+        {
+          "expr": "(max(feign_Client_seconds_max{application=\"eca-server\",host=\"eca-ers\",method=\"getEvaluationResults\"})) >= 0 OR on() vector(0)",
+          "legendFormat": "\"/api/results\" - MAX",
+          "refId": "D"
+        },
+        {
+          "expr": "(sum(rate(feign_Client_seconds_sum{application=\"eca-server\",host=\"eca-ers\",method=\"getClassifierOptions\"}[1m]))/sum(rate(feign_Client_seconds_count{application=\"eca-server\",host=\"eca-ers\",method=\"getClassifierOptions\"}[1m]))) >= 0 OR on() vector(0)",
+          "legendFormat": "\"/api/optimal-classifier-options\" - AVG",
+          "refId": "E"
+        },
+        {
+          "expr": "(max(feign_Client_seconds_max{application=\"eca-server\",host=\"eca-ers\",method=\"getClassifierOptions\"})) >= 0 OR on() vector(0)",
+          "legendFormat": "\"/api/optimal-classifier-options\" - MAX",
+          "refId": "F"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Ers requests time",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": null,
+          "format": "s",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 8
+      },
+      "hiddenSeries": false,
+      "id": 19,
+      "legend": {
+        "avg": false,
+        "current": true,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "(sum(rate(s3_storage_object_request_seconds_sum{application=\"eca-server\",method=\"uploadObject\"}[1m]))/sum(rate(s3_storage_object_request_seconds_count{application=\"eca-server\",method=\"uploadObject\"}[1m]))) >= 0 OR on() vector(0)",
+          "legendFormat": "\"uploadObject\" - AVG",
+          "refId": "A"
+        },
+        {
+          "expr": "(max(s3_storage_object_request_seconds_max{application=\"eca-server\",method=\"uploadObject\"})) >= 0 OR on() vector(0)",
+          "legendFormat": "\"uploadObject\" - MAX",
+          "refId": "B"
+        },
+        {
+          "expr": "(sum(rate(s3_storage_object_request_seconds_sum{application=\"eca-server\",method=\"getObject\"}[1m]))/sum(rate(s3_storage_object_request_seconds_count{application=\"eca-server\",method=\"getObject\"}[1m]))) >= 0 OR on() vector(0)",
+          "legendFormat": "\"getObject\" - AVG",
+          "refId": "C"
+        },
+        {
+          "expr": "(max(s3_storage_object_request_seconds_max{application=\"eca-server\",method=\"getObject\"})) >= 0 OR on() vector(0)",
+          "legendFormat": "\"getObject\" - MAX",
+          "refId": "D"
+        },
+        {
+          "expr": "(sum(rate(s3_storage_object_request_seconds_sum{application=\"eca-server\",method=\"getObjectPresignedProxyUrl\"}[1m]))/sum(rate(s3_storage_object_request_seconds_count{application=\"eca-server\",method=\"getObjectPresignedProxyUrl\"}[1m]))) >= 0 OR on() vector(0)",
+          "legendFormat": "\"getObjectPresignedProxyUrl\" - AVG",
+          "refId": "E"
+        },
+        {
+          "expr": "(max(s3_storage_object_request_seconds_max{application=\"eca-server\",method=\"getObjectPresignedProxyUrl\"})) >= 0 OR on() vector(0)",
+          "legendFormat": "\"getObjectPresignedProxyUrl\" - MAX",
+          "refId": "F"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "S3 requests time",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": null,
+          "format": "s",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 16
+      },
+      "hiddenSeries": false,
+      "id": 10,
+      "legend": {
+        "avg": false,
+        "current": true,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "(sum(rate(feign_Client_http_response_code_total{application=\"eca-server\",host=\"eca-ers\",http_status=\"200\",method=\"save\"}[1m]) * 60) / 2) >= 0 OR on() vector(0)",
+          "intervalFactor": 2,
+          "legendFormat": "/api/save",
+          "refId": "A"
+        },
+        {
+          "expr": "(sum(rate(feign_Client_http_response_code_total{application=\"eca-server\",host=\"eca-ers\",http_status=\"200\",method=\"getEvaluationResults\"}[1m]) * 60) / 2) >= 0 OR on() vector(0)",
+          "intervalFactor": 2,
+          "legendFormat": "/api/results",
+          "refId": "B"
+        },
+        {
+          "expr": "(sum(rate(feign_Client_http_response_code_total{application=\"eca-server\",host=\"eca-ers\",http_status=\"200\",method=\"getClassifierOptions\"}[1m]) * 60) / 2) >= 0 OR on() vector(0)",
+          "intervalFactor": 2,
+          "legendFormat": "/api/optimal-classifier-options",
+          "refId": "C"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Ers success requests / min",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "opm",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "description": "",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 16
+      },
+      "hiddenSeries": false,
+      "id": 20,
+      "legend": {
+        "avg": false,
+        "current": true,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "(sum(rate(s3_storage_object_size_bytes_sum{application=\"eca-server\"}[1m]))/sum(rate(s3_storage_object_size_bytes_count{application=\"eca-server\"}[1m]))) >= 0 OR on() vector(0)",
+          "legendFormat": "AVG size",
+          "refId": "A"
+        },
+        {
+          "expr": "(max(s3_storage_object_size_bytes_max{application=\"eca-server\"})) >= 0 OR on() vector(0)",
+          "legendFormat": "MAX object size",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "S3 request object memory total",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": null,
+          "format": "bytes",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -421,18 +647,18 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 16
+        "y": 24
       },
       "hiddenSeries": false,
       "id": 2,
       "legend": {
         "avg": false,
-        "current": false,
+        "current": true,
         "max": false,
         "min": false,
         "show": true,
         "total": false,
-        "values": false
+        "values": true
       },
       "lines": true,
       "linewidth": 1,
@@ -478,7 +704,7 @@
       },
       "yaxes": [
         {
-          "format": "short",
+          "format": "opm",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -504,26 +730,25 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": null,
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 16
+        "y": 24
       },
       "hiddenSeries": false,
-      "id": 8,
-      "interval": "",
+      "id": 21,
       "legend": {
         "avg": false,
-        "current": false,
+        "current": true,
         "max": false,
         "min": false,
-        "show": false,
+        "show": true,
         "total": false,
-        "values": false
+        "values": true
       },
       "lines": true,
       "linewidth": 1,
@@ -541,17 +766,29 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "(sum(rate(eca_mail_sending_message_error_total[1m]) * 60)) >= 0 OR on() vector(0)",
+          "expr": "(sum(rate(s3_storage_request_success_total{application=\"eca-server\",method=\"uploadObject\"}[1m]) * 60) / 2) >= 0 OR on() vector(0)",
           "intervalFactor": 2,
-          "legendFormat": "mail_error_requests",
+          "legendFormat": "uploadObject",
           "refId": "A"
+        },
+        {
+          "expr": "(sum(rate(s3_storage_request_success_total{application=\"eca-server\",method=\"downloadObject\"}[1m]) * 60) / 2) >= 0 OR on() vector(0)",
+          "intervalFactor": 2,
+          "legendFormat": "downloadObject",
+          "refId": "B"
+        },
+        {
+          "expr": "(sum(rate(s3_storage_request_success_total{application=\"eca-server\",method=\"getObjectPresignedUrl\"}[1m]) * 60) / 2) >= 0 OR on() vector(0)",
+          "intervalFactor": 2,
+          "legendFormat": "getObjectPresignedProxyUrl",
+          "refId": "C"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Mail error requests / min",
+      "title": "S3 success requests / min",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -567,7 +804,7 @@
       },
       "yaxes": [
         {
-          "format": "short",
+          "format": "opm",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -599,19 +836,19 @@
       "gridPos": {
         "h": 8,
         "w": 12,
-        "x": 12,
-        "y": 24
+        "x": 0,
+        "y": 32
       },
       "hiddenSeries": false,
       "id": 6,
       "legend": {
         "avg": false,
-        "current": false,
+        "current": true,
         "max": false,
         "min": false,
         "show": true,
         "total": false,
-        "values": false
+        "values": true
       },
       "lines": true,
       "linewidth": 1,
@@ -667,7 +904,290 @@
       },
       "yaxes": [
         {
+          "format": "opm",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
           "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 32
+      },
+      "hiddenSeries": false,
+      "id": 22,
+      "legend": {
+        "avg": false,
+        "current": true,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "(sum(rate(s3_storage_request_error_total{application=\"eca-server\",method=\"uploadObject\"}[1m]) * 60) / 2) >= 0 OR on() vector(0)",
+          "intervalFactor": 2,
+          "legendFormat": "uploadObject",
+          "refId": "A"
+        },
+        {
+          "expr": "(sum(rate(s3_storage_request_error_total{application=\"eca-server\",method=\"downloadObject\"}[1m]) * 60) / 2) >= 0 OR on() vector(0)",
+          "intervalFactor": 2,
+          "legendFormat": "downloadObject",
+          "refId": "B"
+        },
+        {
+          "expr": "(sum(rate(s3_storage_request_error_total{application=\"eca-server\",method=\"getObjectPresignedUrl\"}[1m]) * 60) / 2) >= 0 OR on() vector(0)",
+          "intervalFactor": 2,
+          "legendFormat": "getObjectPresignedProxyUrl",
+          "refId": "C"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "S3 error requests / min",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "opm",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 40
+      },
+      "hiddenSeries": false,
+      "id": 8,
+      "interval": "",
+      "legend": {
+        "avg": false,
+        "current": true,
+        "max": false,
+        "min": false,
+        "show": false,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "(sum(rate(eca_mail_sending_message_error_total[1m]) * 60)) >= 0 OR on() vector(0)",
+          "intervalFactor": 2,
+          "legendFormat": "mail_error_requests",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Mail error requests / min",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "opm",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 40
+      },
+      "hiddenSeries": false,
+      "id": 4,
+      "legend": {
+        "avg": false,
+        "current": true,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "(sum(rate(feign_Client_http_response_code_total{status_group=\"5xx\",host=\"eca-mail\",application=\"eca-server\"}[1m]) * 60) / 2) >= 0 OR on() vector(0)",
+          "intervalFactor": 2,
+          "legendFormat": "eca-server",
+          "refId": "A"
+        },
+        {
+          "expr": "(sum(rate(feign_Client_http_response_code_total{status_group=\"5xx\",host=\"eca-mail\",application=\"eca-oauth\"}[1m]) * 60) / 2) >= 0 OR on() vector(0)",
+          "intervalFactor": 2,
+          "legendFormat": "eca-oauth",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Eca mail 5xx errors / min",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "opm",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -697,12 +1217,12 @@
     "list": []
   },
   "time": {
-    "from": "now-15m",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Eca - service dashboard",
   "uid": "agLCbhanz",
-  "version": 1
+  "version": 2
 }
