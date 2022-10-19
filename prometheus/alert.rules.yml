@@ -97,3 +97,11 @@ groups:
         annotations:
           summary: "S3 request errors increased in instance {{ $labels.instance }}"
           description: "S3 request errors increased in the last 5 minutes. Total errors rate ({{ humanize $value }})"
+      - alert: EcaWebPushRequestErrorsIncreased
+        expr: sum(increase(feign_Client_http_response_code_total{status_group="5xx",host="eca-web-push"}[5m])) by (instance) >= 4
+        for: 0m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Eca web push request errors increased in instance {{ $labels.instance }}"
+          description: "Eca web push request errors increased in the last 5 minutes. Total errors rate ({{ humanize $value }})"
