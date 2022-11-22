@@ -40,6 +40,7 @@
 * ECA_AUDIT_LOG_JDBC_URL - jdbc url для базы eca-audit-log
 * NS_JDBC_URL - jdbc url для базы eca-mail
 * ERS_JDBC_URL - jdbc url для базы evaluation-results-service
+* ECA_WEB_PUSH_JDBC_URL - jdbc url для базы eca-web-push
 * ECA_WEB_EXTERNAL_URL - внешний url web - приложения
 * OAUTH2_TOKEN_EXTERNAL_URL - внешний url сервера авторизации
 * ECA_OAUTH_URL - базовый url модуля eca-oauth
