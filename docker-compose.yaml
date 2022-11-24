@@ -97,11 +97,15 @@ services:
 
   s3-minio-nginx-proxy:
     container_name: s3-minio-nginx-proxy
-    image: nginx:${NGINX_VERSION}
+    build:
+      context: ./minio-proxy/nginx
+      args:
+        NGINX_VERSION: ${NGINX_VERSION}
+    environment:
+      NGINX_PORT: "8098"
+      S3_MINIO_URL: ${S3_MINIO_URL}
     ports:
       - "8098:8098"
-    volumes:
-      - ./minio-proxy/nginx/nginx.conf:/etc/nginx/nginx.conf
     depends_on:
       - s3-minio-storage
 
