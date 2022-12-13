@@ -15,9 +15,10 @@ psql -v ON_ERROR_STOP=1 --username $POSTGRES_USER <<-EOSQL
     CREATE DATABASE $ECA_AUDIT_LOG_DB_NAME;
     CREATE DATABASE $ECA_WEB_PUSH_DB_NAME;
 EOSQL
-pg_restore -U $POSTGRES_USER -d $ECA_DB_NAME $BACKUPS_FOLDER/eca-db.backup
-pg_restore -U $POSTGRES_USER -d $ECA_OAUTH_DB_NAME $BACKUPS_FOLDER/eca-oauth.backup
-pg_restore -U $POSTGRES_USER -d $ERS_DB_NAME $BACKUPS_FOLDER/ers-db.backup
-pg_restore -U $POSTGRES_USER -d $MAIL_DB_NAME $BACKUPS_FOLDER/ndb.backup
-pg_restore -U $POSTGRES_USER -d $ECA_DS_DB_NAME $BACKUPS_FOLDER/data-storage.backup
-pg_restore -U $POSTGRES_USER -d $ECA_AUDIT_LOG_DB_NAME $BACKUPS_FOLDER/audit-log-db.backup
+psql $ECA_DB_NAME < $BACKUPS_FOLDER/eca-backup.sql
+psql $ECA_OAUTH_DB_NAME < $BACKUPS_FOLDER/eca-oauth-backup.sql
+psql $ERS_DB_NAME < $BACKUPS_FOLDER/eca-ers-backup.sql
+psql $MAIL_DB_NAME < $BACKUPS_FOLDER/eca-mail-backup.sql
+psql $ECA_DS_DB_NAME < $BACKUPS_FOLDER/eca-data-storage-backup.sql
+psql $ECA_AUDIT_LOG_DB_NAME < $BACKUPS_FOLDER/eca-audit-log-backup.sql
+psql $ECA_WEB_PUSH_DB_NAME < $BACKUPS_FOLDER/eca-web-push-backup.sql
