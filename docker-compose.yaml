@@ -32,14 +32,6 @@ x-collect-logs-with-filebeat: &collect-logs-with-filebeat
     collect_logs_with_filebeat: "true"
     decode_log_event_to_json_object: "true"
 
-x-eca-server-base: &eca-server-base
-  image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:eca-server
-  depends_on:
-    - postgres-db
-    - rabbitmq
-    - discovery-server
-  <<: *collect-logs-with-filebeat
-
 services:
 
   postgres-db:
@@ -121,17 +113,15 @@ services:
       LOGGING_MODE: ${LOGGING_MODE}
     <<: *collect-logs-with-filebeat
 
-  eca-server-instance-1:
-    <<: *eca-server-base
-    container_name: eca-server-instance-1
+  eca-server:
+    image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:eca-server
     environment:
       <<: *eca-server-env-variables
-
-  eca-server-instance-2:
-    <<: *eca-server-base
-    container_name: eca-server-instance-2
-    environment:
-      <<: *eca-server-env-variables
+    depends_on:
+      - postgres-db
+      - rabbitmq
+      - discovery-server
+    <<: *collect-logs-with-filebeat
 
   eca-oauth:
     image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:eca-oauth
