@@ -26,12 +26,13 @@ scrape_configs:
     static_configs:
       - targets: ['discovery-server:8761']
   - job_name: 'service-discovery'
-    metrics_path: '/actuator/prometheus'
     http_sd_configs:
       - url: 'http://discovery-server:8761/api/prometheus/sd-configs'
         refresh_interval: 30s
     relabel_configs:
-      - source_labels: [__meta_discovery_app_name__]
+      - source_labels: [__meta_discovery_app_name]
         target_label: application
-      - source_labels: [__meta_discovery_app_instance_name__]
+      - source_labels: [__meta_discovery_app_instance_name]
         target_label: instance
+      - source_labels: [__meta_discovery_app_instance_metrics_path]
+        target_label: __metrics_path__
