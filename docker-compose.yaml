@@ -2,8 +2,6 @@ version: "3.5"
 
 x-eca-server-variables: &eca-server-env-variables
   TZ: ${TIME_ZONE}
-  DB_CONTAINER_WAIT: ${DB_CONTAINER_WAIT}
-  DB_CONTAINER_WAIT_TIMEOUT: ${DB_CONTAINER_WAIT_TIMEOUT}
   JAVA_OPTS: "-Xmx2g"
   SPRING_PROFILES_ACTIVE: "docker-prod"
   QUEUE_EVALUATIONREQUESTQUEUE: ${QUEUE_EVALUATION_REQUEST_QUEUE}
@@ -138,8 +136,6 @@ services:
     container_name: eca-oauth
     environment:
       TZ: ${TIME_ZONE}
-      DB_CONTAINER_WAIT: ${DB_CONTAINER_WAIT}
-      DB_CONTAINER_WAIT_TIMEOUT: ${DB_CONTAINER_WAIT_TIMEOUT}
       JAVA_OPTS: "-Xmx756m"
       SPRING_PROFILES_ACTIVE: "docker-prod"
       SPRING_DATASOURCE_URL: ${ECA_OAUTH_JDBC_URL}
@@ -191,8 +187,6 @@ services:
     container_name: eca-mail
     environment:
       TZ: ${TIME_ZONE}
-      DB_CONTAINER_WAIT: ${DB_CONTAINER_WAIT}
-      DB_CONTAINER_WAIT_TIMEOUT: ${DB_CONTAINER_WAIT_TIMEOUT}
       JAVA_OPTS: "-Xmx756m"
       SPRING_PROFILES_ACTIVE: "docker-prod"
       SPRING_DATASOURCE_URL: ${NS_JDBC_URL}
@@ -213,8 +207,6 @@ services:
     container_name: eca-data-storage
     environment:
       TZ: ${TIME_ZONE}
-      DB_CONTAINER_WAIT: ${DB_CONTAINER_WAIT}
-      DB_CONTAINER_WAIT_TIMEOUT: ${DB_CONTAINER_WAIT_TIMEOUT}
       JAVA_OPTS: "-Xmx756m"
       SPRING_PROFILES_ACTIVE: "docker-prod"
       SPRING_DATASOURCE_URL: ${ECA_DS_JDBC_URL}
@@ -240,8 +232,6 @@ services:
     container_name: eca-ers
     environment:
       TZ: ${TIME_ZONE}
-      DB_CONTAINER_WAIT: ${DB_CONTAINER_WAIT}
-      DB_CONTAINER_WAIT_TIMEOUT: ${DB_CONTAINER_WAIT_TIMEOUT}
       JAVA_OPTS: "-Xmx1g"
       SPRING_PROFILES_ACTIVE: "docker-prod"
       SPRING_DATASOURCE_URL: ${ERS_JDBC_URL}
@@ -261,8 +251,6 @@ services:
       - "8099:8099"
     environment:
       TZ: ${TIME_ZONE}
-      DB_CONTAINER_WAIT: ${DB_CONTAINER_WAIT}
-      DB_CONTAINER_WAIT_TIMEOUT: ${DB_CONTAINER_WAIT_TIMEOUT}
       SERVER_PORT: "8099"
       SPRING_PROFILES_ACTIVE: "docker-prod"
       SPRING_DATASOURCE_URL: ${ECA_WEB_PUSH_JDBC_URL}
@@ -280,8 +268,6 @@ services:
     container_name: eca-audit-log
     environment:
       TZ: ${TIME_ZONE}
-      DB_CONTAINER_WAIT: ${DB_CONTAINER_WAIT}
-      DB_CONTAINER_WAIT_TIMEOUT: ${DB_CONTAINER_WAIT_TIMEOUT}
       JAVA_OPTS: "-Xmx512m"
       SPRING_PROFILES_ACTIVE: "docker-prod"
       SPRING_DATASOURCE_URL: ${ECA_AUDIT_LOG_JDBC_URL}
