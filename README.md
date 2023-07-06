@@ -18,8 +18,6 @@
 * DOCKER_USERNAME - docker логин
 * POSTGRES_USER - логин пользователя PostgreSQL БД
 * POSTGRES_PASSWORD - пароль пользователя PostgreSQL БД
-* DB_CONTAINER_WAIT - URI PostgreSQL БД (переменная для скрипта wait-fot-it.sh)
-* DB_CONTAINER_WAIT_TIMEOUT - таймаут ожидания старта контейнера в сек. (переменная для скрипта wait-fot-it.sh)
 * PG_EXPORTER_DATASOURCE_URI - URI БД для postgres exporter
 * GRAFANA_LOGIN - логин пользователя Grafana
 * GRAFANA_PASSWORD - пароль пользователя Grafana
