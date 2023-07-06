@@ -21,43 +21,18 @@ scrape_configs:
     metrics_path: '/minio/prometheus/metrics'
     static_configs:
       - targets: ['s3-minio-storage:9000']
-  - job_name: 'eca-oauth'
-    metrics_path: '/actuator/prometheus'
-    static_configs:
-      - targets: ['eca-oauth:8080']
-  - job_name: 'eca-server'
-    metrics_path: '/actuator/prometheus'
-    static_configs:
-      - targets: ['eca-server-instance-1:8080', 'eca-server-instance-2:8080']
-  - job_name: 'eca-ers'
-    metrics_path: '/actuator/prometheus'
-    static_configs:
-      - targets: ['eca-ers:8080']
-  - job_name: 'eca-mail'
-    metrics_path: '/actuator/prometheus'
-    static_configs:
-      - targets: ['eca-mail:8080']
-  - job_name: 'eca-data-storage'
-    metrics_path: '/actuator/prometheus'
-    static_configs:
-      - targets: ['eca-data-storage:8080']
-  - job_name: 'eca-web'
-    metrics_path: '/actuator/prometheus'
-    static_configs:
-      - targets: ['eca-web:8080']
   - job_name: 'discovery-server'
     metrics_path: '/actuator/prometheus'
     static_configs:
       - targets: ['discovery-server:8761']
-  - job_name: 'zuul-gate'
-    metrics_path: '/actuator/prometheus'
-    static_configs:
-      - targets: ['zuul-gate:8030']
-  - job_name: 'eca-web-push'
-    metrics_path: '/actuator/prometheus'
-    static_configs:
-      - targets: ['eca-web-push:8099']
-  - job_name: 'eca-audit-log'
-    metrics_path: '/actuator/prometheus'
-    static_configs:
-      - targets: ['eca-audit-log:8080']
+  - job_name: 'service-discovery'
+    http_sd_configs:
+      - url: 'http://discovery-server:8761/api/prometheus/sd-configs'
+        refresh_interval: 30s
+    relabel_configs:
+      - source_labels: [__meta_discovery_app_name]
+        target_label: application
+      - source_labels: [__meta_discovery_app_instance_name]
+        target_label: instance
+      - source_labels: [__meta_discovery_app_instance_metrics_path]
+        target_label: __metrics_path__
