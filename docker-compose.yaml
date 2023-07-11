@@ -237,11 +237,8 @@ services:
   eca-web-push:
     image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:eca-web-push
     container_name: eca-web-push
-    ports:
-      - "8099:8099"
     environment:
       TZ: ${TIME_ZONE}
-      SERVER_PORT: "8099"
       SPRING_PROFILES_ACTIVE: "docker-prod"
       SPRING_DATASOURCE_URL: ${ECA_WEB_PUSH_JDBC_URL}
       SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
