@@ -158,9 +158,9 @@ services:
       - discovery-server
     <<: *collect-logs-with-filebeat
 
-  zuul-gate:
-    image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:zuul-gate
-    container_name: zuul-gate
+  api-gateway:
+    image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:api-gateway
+    container_name: api-gateway
     environment:
       TZ: ${TIME_ZONE}
       JAVA_OPTS: "-Xmx1g"
