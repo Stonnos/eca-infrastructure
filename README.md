@@ -33,6 +33,8 @@
 * PROMETHEUS_EXTERNAL_URL - внешний url для Prometheus
 * ALERT_MANAGER_EXTERNAL_URL - внешний url для Alert manager
 * ECA_SERVER_JDBC_URL - jdbc url для базы eca-server
+* ECA_SERVER_CAMUNDA_JDBC_URL - jdbc url для базы camunda
+* ECA_DATA_LOADER_JDBC_URL - jdbc url для базы data loader
 * ECA_OAUTH_JDBC_URL - jdbc url для базы eca-oauth
 * ECA_DS_JDBC_URL - jdbc url для базы eca-data-storage
 * ECA_AUDIT_LOG_JDBC_URL - jdbc url для базы eca-audit-log
